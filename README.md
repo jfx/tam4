@@ -1,4 +1,10 @@
 # Tam4
+Tam4 for Time Activity Management is a personal productivity app.
+
+tam4 features :
+
+* Web interface,
+* Open source.
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.19-3.
 
