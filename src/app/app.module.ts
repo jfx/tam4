@@ -6,15 +6,18 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { BannerComponent } from './banner/banner.component';
 
+import { PersonalModule } from './personal/personal.module';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    BannerComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    PersonalModule
+  ],
+  declarations: [
+    AppComponent,
+    BannerComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
