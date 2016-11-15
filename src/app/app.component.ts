@@ -6,6 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // TODO: change title
-  title = 'app works!';
+  footer = 'tam4.io v x.y.z - bbb &copy; 2016';
 }

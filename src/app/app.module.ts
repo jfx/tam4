@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { BannerComponent } from './banner/banner.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 import { PersonalModule } from './personal/personal.module';
 
@@ -17,7 +17,7 @@ import { PersonalModule } from './personal/personal.module';
   ],
   declarations: [
     AppComponent,
-    BannerComponent,
+    NavbarComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

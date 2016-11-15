@@ -1,7 +1,50 @@
-<p> Personal Dashboard </p>
-
-<ul>
-  <li *ngFor="let action of actions">
-    <span>{{ action.title }}</span>
-  </li>
-</ul>
+<div class="row">
+  <div class="col-sm-6">
+    <h3> Sprint backlog </h3>
+    <ul class="list-group list-group-sortable-connected">
+      <li class="list-group-item list-group-item closed" *ngFor="let action of actions">
+        <div class="row">
+          <i onClick="window.alert('Action closed !');" class="fa fa-square-o"></i> &nbsp;
+          <a href="www.eco4.io">{{ action.title }} [In Progress] <span class="tag tag-pill tag-default">1</span></a>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <span class="tag tag-danger">Urgent</span>
+            <span class="tag tag-default">Project 1</span>
+          </div>
+          <div class="col-xs-6">
+            <div class="col-xs-2">
+              <span class="tag tag-pill tag-success">1 / 2</span>
+            </div>
+            <span class="tag tag-default">21/10/2016</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-sm-6">
+    <h3> Todo today </h3>
+    <ul class="list-group list-group-sortable-connected">
+      <li class="list-group-item list-group-item-info">
+        <div class="row">
+          <div class="col-xs-10"><i onClick="window.alert('Action closed !');" class="fa fa-square-o"></i> &nbsp;
+            <a href="www.eco4.io">Cras justo odio dapibus ac facilisis in [In Progress] <span class="tag tag-pill tag-default">1</span></a>
+          </div>
+          <div class="col-xs-2">
+            <span class="tag tag-pill tag-success">1 / 2</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-10">
+            <span class="tag tag-danger">Urgent</span>
+            <span class="tag tag-default">Project 1</span>
+          </div>
+          <div class="col-xs-2">
+            <span class="tag tag-default">21/10/2016</span>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item list-group-item-success">Vestibulum at eros</li>
+    </ul>
+  </div>
+</div>

@@ -20,16 +20,16 @@ describe('App: Tam4', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app works!'`, async(() => {
+  it(`should contain as title 'tam4.io'`, async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
+    expect(app.footer).toContain('tam4.io');
   }));
 
-  it('should render title in a p tag', async(() => {
+  it('should render footer in a link tag', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     let compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('p').textContent).toContain('app works!');
+    expect(compiled.querySelector('a').textContent).toContain('tam4.io');
   }));
 });

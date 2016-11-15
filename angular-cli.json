@@ -18,9 +18,16 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
+        "assets/css/font-awesome.css",
+        "assets/css/bootstrap.css",
+        "assets/scss/main.scss",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "assets/js/jquery-3.1.1.min.js",
+        "assets/js/tether.min.js",
+        "assets/js/bootstrap.min.js"
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
@@ -28,7 +35,9 @@
       }
     }
   ],
-  "addons": [],
+  "addons": [
+    "assets/fonts/*.+(otf|eot|svg|ttf|woff|woff2)"
+  ],
   "packages": [],
   "e2e": {
     "protractor": {
