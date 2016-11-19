@@ -8,21 +8,21 @@ import { ActionService } from '../shared/action.service';
 import { FakeActionService, TESTACTIONS } from '../shared/test/fake-action.service';
 
 @Component({
-  selector: 'app-personal-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  selector: 'app-personal-today',
+  templateUrl: './today.component.html',
+  styleUrls: ['./today.component.css'],
 })
-export class DashboardComponent implements OnInit {
+export class TodayComponent implements OnInit {
 
   actions: Action[];
 
-   constructor(private actionService: ActionService) { }
+  constructor(private actionService: ActionService) { }
 
   ngOnInit(): void {
-    this.getHeroes();
+    this.getActions();
   }
 
-  getHeroes(): void {
+  getActions(): void {
     this.actionService.getActions()
       .map(actions => {
         this.actions = actions;

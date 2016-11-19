@@ -3,18 +3,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { DashboardComponent } from './dashboard.component';
+import { TodayComponent } from './today.component';
 import { Action } from '../shared/action.model';
 import { ActionService } from '../shared/action.service';
 
 import { PersonalModule } from '../personal.module';
 import { FakeActionService, TESTACTIONS } from '../shared/test/fake-action.service';
 
-let component: DashboardComponent;
-let fixture: ComponentFixture<DashboardComponent>;
+let component: TodayComponent;
+let fixture: ComponentFixture<TodayComponent>;
 let page: Page;
 
-describe('DashboardComponent', () => {
+describe('TodayComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -48,7 +48,7 @@ describe('DashboardComponent', () => {
 });
 
 function createComponent() {
-    fixture = TestBed.createComponent(DashboardComponent);
+    fixture = TestBed.createComponent(TodayComponent);
     component = fixture.componentInstance;
 
     // change detection triggers ngOnInit which gets a hero

@@ -17,16 +17,20 @@ body {
   background-repeat: no-repeat;
 }
 
-.body-container {
-  -webkit-flex: 1;
-  flex: 1;
-  // needed to prevent pages with a very small height and browsers not supporting flex
-  min-height: 600px;
-  #main h1,
-  #main h2 {
-    margin-top: 0;
-  }
+section {
+  padding: 25px 0 0 0;
 }
+
+// .body-container {
+//   -webkit-flex: 1;
+//   flex: 1;
+//   // needed to prevent pages with a very small height and browsers not supporting flex
+//   min-height: 600px;
+//   #main h1,
+//   #main h2 {
+//     margin-top: 0;
+//   }
+// }
 
 .navbar-brand {
   padding: 0px;
@@ -45,11 +49,6 @@ th {
   color: white;
 }
 
-.footer>p {
-  text-align: center;
-}
-
-// Footer
 footer {
   margin-top: 1em;
   padding-top: 1em;

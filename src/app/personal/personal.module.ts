@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './shared/in-memory-data.service';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { TodayComponent } from './today/today.component';
 import { ActionService } from './shared/action.service';
 
 @NgModule({
@@ -18,10 +18,10 @@ import { ActionService } from './shared/action.service';
     InMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   declarations: [
-    DashboardComponent,
+    TodayComponent,
   ],
   exports: [
-    DashboardComponent,
+    TodayComponent,
   ],
   providers: [ActionService],
   bootstrap: []

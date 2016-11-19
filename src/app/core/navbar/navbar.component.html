@@ -1,15 +1,18 @@
 <header>
   <nav class="navbar navbar-full navbar-dark bg-inverse">
-    <a class="navbar-brand" href="#">Tam4</a>
+    <a class="navbar-brand" routerLink="/home">Tam4</a>
     <ul class="nav navbar-nav float-lg-right">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="#"><i class="fa fa-plus-circle"></i> Add</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#"><i class="fa fa-home"></i> Personal <span class="sr-only">(current)</span></a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/home"><i class="fa fa-dashboard"></i> Dashboard</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/today"><i class="fa fa-home"></i> Personal</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-tasks"></i> Project</a>
+        <a class="nav-link" href="#"><i class="fa fa-tasks"></i> Projects</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"><i class="fa fa-user"></i> Profile</a>
