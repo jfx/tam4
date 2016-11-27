@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 
 import { Action } from '../shared/action.model';
 import { ActionService } from '../shared/action.service';
-import { FakeActionService, TESTACTIONS } from '../shared/test/fake-action.service';
 
 @Component({
   selector: 'app-personal-today',

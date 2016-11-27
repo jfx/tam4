@@ -3,10 +3,18 @@ export class Action {
   constructor(
     public id: number,
     public title: string,
-    public description: string,
-    public position: number) { }
+    public todo: number,
+    public done: number,  // default value 0
+    public description?: string,
+    public date?: string) { }
 
   clone() {
-    return new Action(this.id, this.title, this.description, this.position);
+    return new Action(
+      this.id,
+      this.title,
+      this.todo,
+      this.done,
+      this.description,
+      this.date);
   }
 }

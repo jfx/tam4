@@ -6,8 +6,9 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './core/navbar/navbar.component';
+import { DatepickerComponent } from './core/datepicker/datepicker.component';
 import { HomeComponent } from './core/home/home.component';
+import { NavbarComponent } from './core/navbar/navbar.component';
 
 import { PersonalModule } from './personal/personal.module';
 
@@ -17,12 +18,16 @@ import { PersonalModule } from './personal/personal.module';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    PersonalModule
+    PersonalModule,
   ],
   declarations: [
     AppComponent,
-    NavbarComponent,
+    //    DatepickerComponent,
     HomeComponent,
+    NavbarComponent,
+  ],
+  exports: [
+    //    DatepickerComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

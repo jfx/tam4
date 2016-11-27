@@ -1,0 +1,5 @@
+<label class="col-xs-3 col-form-label">{{ label }}</label>
+<div class="col-xs-5">
+  <input [(ngModel)]="dateModel" class="form-control" (focus)="showPopup()">
+</div>
+<datepicker class="popup-datepicker" *ngIf="showDatepicker" [(ngModel)]="dateModel" (selectionDone)="hidePopup($event)"></datepicker>

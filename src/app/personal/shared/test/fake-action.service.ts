@@ -6,8 +6,8 @@ import { Action } from '../action.model';
 import { ActionService } from '../action.service';
 
 export var TESTACTIONS: Action[] = [
-    new Action(41, 'Title 1', 'Desc 1', 1),
-    new Action(42, 'Title 2', 'Desc 2', 2),
+    new Action(41, 'Title 1', 1, 2, 'Desc 1'),
+    new Action(42, 'Title 2', 3, 4, 'Desc 2', '31/12/2016'),
 ];
 
 export class FakeActionService {
