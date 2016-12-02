@@ -6,11 +6,12 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { DatepickerComponent } from './core/datepicker/datepicker.component';
-import { HomeComponent } from './core/home/home.component';
-import { NavbarComponent } from './core/navbar/navbar.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
+import { CoreModule } from './core/core.module';
+import { HomeModule } from './home/home.module';
 import { PersonalModule } from './personal/personal.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   imports: [
@@ -18,16 +19,16 @@ import { PersonalModule } from './personal/personal.module';
     FormsModule,
     HttpModule,
     AppRoutingModule,
+    CoreModule,
+    HomeModule,
     PersonalModule,
+    SharedModule,
   ],
   declarations: [
     AppComponent,
-    //    DatepickerComponent,
-    HomeComponent,
     NavbarComponent,
   ],
   exports: [
-    //    DatepickerComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

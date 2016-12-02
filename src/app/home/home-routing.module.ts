@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TodayComponent } from './today/today.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-    { path: '', component: TodayComponent }
+    { path: '', component: DashboardComponent }
 ];
 
 @NgModule({
@@ -12,4 +12,4 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 
-export class PersonalRoutingModule { }
+export class HomeRoutingModule { }
