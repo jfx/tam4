@@ -25,7 +25,7 @@ export class InMemoryDataService implements InMemoryDbService {
         todo: 4,
         done: 1,
         description: '#10 slides',
-        date: '09/12/2016'
+        date: '2016-12-09'
       },
       {
         id: 14,
@@ -33,7 +33,7 @@ export class InMemoryDataService implements InMemoryDbService {
         todo: 5,
         done: 0,
         description: '',
-        date: '16/12/2016'
+        date: '2016-12-16'
       },
       {
         id: 15,
@@ -41,7 +41,7 @@ export class InMemoryDataService implements InMemoryDbService {
         todo: 10,
         done: 1,
         description: '',
-        date: '31/12/2016'
+        date: '2016-12-31'
       },
       {
         id: 16,
@@ -49,7 +49,7 @@ export class InMemoryDataService implements InMemoryDbService {
         todo: 6,
         done: 0,
         description: '',
-        date: '31/12/2016'
+        date: '2016-12-31'
       },
     ];
     return { actions };

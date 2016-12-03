@@ -13,7 +13,7 @@
       <span class="tag tag-pill tag-success">
         {{ action.done }} / {{ action.todo + action.done }}
       </span>
-      <span class="tag tag-pill tag-default">{{ action.date }}</span>
+      <span class="tag tag-pill tag-default">{{ displayDate() }}</span>
     </div>
   </div>
 </div>
@@ -24,7 +24,10 @@
       <input type="text" class="form-control" id="title" required [(ngModel)]="action.title" name="title" placeholder="Title">
     </div>
     <div class="form-group row">
-      <app-datepicker [dateModel]="action.date" [label]="'Due date'"></app-datepicker>
+      <label class="col-xs-3 col-form-label">Due date</label>
+      <div class="col-xs-5">
+        <my-date-picker [selDate]="displayDate()" [options]="myDatePickerNormalOptions" (dateChanged)="onDateChanged($event)"></my-date-picker>
+      </div>
     </div>
     <div class="form-group row">
       <label class="col-xs-3 col-form-label" for="todo">Todo</label>
