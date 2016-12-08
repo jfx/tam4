@@ -2,8 +2,8 @@
 
 import { Observable } from 'rxjs/Observable';
 
-import { Action } from '../action.model';
-import { ActionService } from '../action.service';
+import { Action } from 'app/personal/shared/action.model';
+import { ActionService } from '../action/action.service';
 
 export var TESTACTIONS: Action[] = [
     new Action(41, 'Title 1', 1, 2, 'Desc 1'),

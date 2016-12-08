@@ -10,9 +10,9 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
-import { Action } from './action.model';
+import { Action } from 'app/personal/shared/action.model';
 import { ActionService } from './action.service';
-import { TESTACTIONS } from './test/fake-action.service';
+import { TESTACTIONS } from '../test/fake-action.service';
 
 describe('Service: Action', () => {
 

@@ -1,10 +1,13 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { ActionComponent } from './action.component';
 import { Action } from '../shared/action.model';
+import { ActionService } from 'app/core/service/action/action.service';
 
 describe('ActionComponent', () => {
   let component: ActionComponent;
@@ -12,7 +15,10 @@ describe('ActionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ActionComponent]
+      imports: [FormsModule, HttpModule],
+      declarations: [ActionComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [ActionService]
     })
       .compileComponents();
   }));

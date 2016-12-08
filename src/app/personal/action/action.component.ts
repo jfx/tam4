@@ -1,7 +1,11 @@
 import { Component, Input } from '@angular/core';
 
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
+
 import * as moment from 'moment';
 
+import { ActionService } from 'app/core/service/action/action.service';
 import { Action } from '../shared/action.model';
 
 @Component({
@@ -14,25 +18,34 @@ export class ActionComponent {
   @Input()
   action: Action;
   edit: boolean = false;
-  todos = [0.25, 0.5, 1, 2, 3, 5, 8, 13, 20];
+
   private myDatePickerNormalOptions = {
-    todayBtnTxt: 'Today',
     dateFormat: 'dd/mm/yyyy',
-    firstDayOfWeek: 'mo',
-    sunHighlight: true,
-    showCurrentDay: true,
-    height: '34px',
-    width: '260px',
     selectionTxtFontSize: '14px',
-    alignSelectorRight: false,
-    indicateInvalidDate: true,
     showDateFormatPlaceholder: true,
     editableMonthAndYear: true,
-    minYear: 1900,
-    componentDisabled: false
+    minYear: 2016,
   };
 
+  constructor(
+    private actionService: ActionService
+  ) { }
+
+
   onSubmit(): void {
+    this.actionService.update(this.action);
+    this.unsetEdit();
+  }
+
+  close(): void {
+    this.actionService.getAction(this.action.id)
+      .map(action => {
+        this.action = action;
+      })
+      .toPromise()
+      .catch(err => {
+        console.error(err);
+      });
     this.unsetEdit();
   }
 

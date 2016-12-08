@@ -7,9 +7,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('App: Tam4', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
+      declarations: [AppComponent],
       schemas: [NO_ERRORS_SCHEMA]
     });
   });

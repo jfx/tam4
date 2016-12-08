@@ -4,7 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
 import { Action } from '../shared/action.model';
-import { ActionService } from '../shared/action.service';
+import { ActionService } from 'app/core/service/action/action.service';
 
 @Component({
   selector: 'app-personal-today',

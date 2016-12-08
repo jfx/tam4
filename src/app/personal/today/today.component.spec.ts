@@ -5,10 +5,10 @@ import { DebugElement } from '@angular/core';
 
 import { TodayComponent } from './today.component';
 import { Action } from '../shared/action.model';
-import { ActionService } from '../shared/action.service';
+import { ActionService } from 'app/core/service/action/action.service';
 
 import { PersonalModule } from '../personal.module';
-import { FakeActionService, TESTACTIONS } from '../shared/test/fake-action.service';
+import { FakeActionService, TESTACTIONS } from 'app/core/service/test/fake-action.service';
 
 let component: TodayComponent;
 let fixture: ComponentFixture<TodayComponent>;

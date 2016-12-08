@@ -25,24 +25,25 @@
     </div>
     <div class="form-group row">
       <label class="col-xs-3 col-form-label">Due date</label>
-      <div class="col-xs-5">
+      <div class="col-xs-4">
         <my-date-picker [selDate]="displayDate()" [options]="myDatePickerNormalOptions" (dateChanged)="onDateChanged($event)"></my-date-picker>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-xs-3 col-form-label" for="todo">Todo</label>
-      <div class="col-xs-2">
-        <input type="number" class="form-control" id="todo" [(ngModel)]="action.todo" name="todo">
+      <div class="col-xs-3">
+        <input type="number" class="form-control" id="todo" required [(ngModel)]="action.todo" name="todo">
       </div>
       <label class="col-xs-3 col-form-label" for="done">Done</label>
-      <div class="col-xs-2">
-        <input type="number" class="form-control" id="done" [(ngModel)]="action.done" name="done">
+      <div class="col-xs-3">
+        <input type="number" class="form-control" id="done" required [(ngModel)]="action.done" name="done">
       </div>
     </div>
     <div class="form-group">
       <label class="sr-only" for="desc">Description</label>
       <textarea type="text" class="form-control" id="desc" [(ngModel)]="action.description" name="desc" rows="4" placeholder="Description"></textarea>
     </div>
-    <button type="submit" class="btn btn-default" [disabled]="!actionForm.form.valid">Close</button>
+    <button type="submit" class="btn btn-success" [disabled]="!actionForm.form.valid">Save</button>
+    <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
   </form>
 </div>
