@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
+import { AngularFire } from 'angularfire2';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -8,34 +9,46 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
+import { environment } from 'app/../environments/environment';
+
 import { Action } from 'app/personal/shared/action.model';
 
 @Injectable()
 export class ActionService {
-  private actionsUrl = 'app/actions';  // URL to web api
+  private actionsInMemoryUrl = 'app/actions';  // URL to web api
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http) { }
+  private sprintBacklog;
+
+  constructor(private http: Http, private af: AngularFire) {
+    this.sprintBacklog = this.af.database.list('/backlog-sprint');
+  }
 
   getActions(): Observable<Action[]> {
-    return this.http.get(this.actionsUrl)
-      .map(this.extractData)
-      .catch(this.handleError);
+    if (environment.envName === 'DEV') {
+      return this.http.get(this.actionsInMemoryUrl)
+        .map(this.extractData)
+        .catch(this.handleError);
+    }
+    return this.sprintBacklog;
   }
 
-  getAction(id: number): Observable<Action> {
-    const url = `${this.actionsUrl}/${id}`;
-    return this.http.get(url)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  update(action: Action): Observable<Action[]> {
-    const url = `${this.actionsUrl}/${action.id}`;
-    return this.http
-      .put(url, JSON.stringify(action), { headers: this.headers })
-      .map(this.extractData)
-      .catch(this.handleError);
+  update(key: string, action: Action): void {
+    if (environment.envName == 'DEV') {
+      const url = `${this.actionsInMemoryUrl}/${action.id}`;
+      this.http
+        .put(url, JSON.stringify(action), { headers: this.headers })
+        .map(this.extractData)
+        .catch(this.handleError);
+    }
+    this.sprintBacklog.update(
+      key, {
+        title: action.title,
+        todo: action.todo,
+        done: action.done,
+        description: action.description,
+        date: action.date,
+      });
   }
 
   private extractData(res: Response) {

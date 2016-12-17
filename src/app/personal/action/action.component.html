@@ -18,7 +18,7 @@
   </div>
 </div>
 <div [hidden]="!edit">
-  <form (ngSubmit)="onSubmit()" #actionForm="ngForm">
+  <form (ngSubmit)="onSubmit(action.$key)" #actionForm="ngForm">
     <div class="form-group">
       <label class="sr-only" for="title">Title</label>
       <input type="text" class="form-control" id="title" required [(ngModel)]="action.title" name="title" placeholder="Title">
@@ -44,6 +44,6 @@
       <textarea type="text" class="form-control" id="desc" [(ngModel)]="action.description" name="desc" rows="4" placeholder="Description"></textarea>
     </div>
     <button type="submit" class="btn btn-success" [disabled]="!actionForm.form.valid">Save</button>
-    <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+    <button type="button" class="btn btn-secondary" (click)="close(action.$key)">Close</button>
   </form>
 </div>

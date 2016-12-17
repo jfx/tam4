@@ -3,16 +3,27 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 // Necessary for in-memory-web-api
 import { HttpModule } from '@angular/http';
 
+import { environment } from 'app/../environments/environment';
+
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './service/action/in-memory-data.service';
+import { AngularFireModule } from 'angularfire2';
 
 import { ActionService } from './service/action/action.service';
+
+export const firebaseConfig = {
+  apiKey: environment.apiKey,
+  authDomain: environment.authDomain,
+  databaseURL: environment.databaseURL,
+  storageBucket: environment.storageBucket
+};
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
   declarations: [
   ],

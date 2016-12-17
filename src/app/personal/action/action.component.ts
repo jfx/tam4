@@ -17,6 +17,7 @@ export class ActionComponent {
 
   @Input()
   action: Action;
+  actionBackup: Action;
   edit: boolean = false;
 
   private myDatePickerNormalOptions = {
@@ -32,24 +33,31 @@ export class ActionComponent {
   ) { }
 
 
-  onSubmit(): void {
-    this.actionService.update(this.action);
+  onSubmit(key: string): void {
+    this.actionService.update(key, this.action);
     this.unsetEdit();
   }
 
-  close(): void {
-    this.actionService.getAction(this.action.id)
-      .map(action => {
-        this.action = action;
-      })
-      .toPromise()
-      .catch(err => {
-        console.error(err);
-      });
+  close(key: string): void {
+      this.action.id = this.actionBackup.id;
+      this.action.title = this.actionBackup.title;
+      this.action.todo = this.actionBackup.todo;
+      this.action.done = this.actionBackup.done;
+      this.action.description = this.actionBackup.description;
+      this.action.date = this.actionBackup.date;
+
     this.unsetEdit();
   }
 
   setEdit(): void {
+    this.actionBackup = new Action(
+      this.action.id,
+      this.action.title,
+      this.action.todo,
+      this.action.done,
+      this.action.description,
+      this.action.date
+    );
     this.edit = true;
   }
 

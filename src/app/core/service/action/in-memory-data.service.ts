@@ -5,7 +5,7 @@ export class InMemoryDataService implements InMemoryDbService {
     let actions = [
       {
         id: 11,
-        title: 'Take children to school',
+        title: '[DEV] Take children to school',
         todo: 1,
         done: 0,
         description: 'Before 08:35',
@@ -13,7 +13,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: 12,
-        title: 'Stand-up meeting',
+        title: '[DEV] Stand-up meeting',
         todo: 1,
         done: 0,
         description: 'At 10:00',
@@ -21,7 +21,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: 13,
-        title: 'Prepare Continuous Delivery presentation',
+        title: '[DEV] Prepare Continuous Delivery presentation',
         todo: 4,
         done: 1,
         description: '#10 slides',
@@ -29,7 +29,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: 14,
-        title: 'Write Docker best practices',
+        title: '[DEV] Write Docker best practices',
         todo: 5,
         done: 0,
         description: '',
@@ -37,7 +37,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: 15,
-        title: 'Read "Scaling Lean & Agile Development"',
+        title: '[DEV] Read "Scaling Lean & Agile Development"',
         todo: 10,
         done: 1,
         description: '',
@@ -45,7 +45,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: 16,
-        title: 'Learn "Introduction to TypeScript" course with very very long title and some other things',
+        title: '[DEV] Learn "Introduction to TypeScript" course with very very long title and some other things',
         todo: 6,
         done: 0,
         description: '',
