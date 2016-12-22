@@ -1,7 +1,7 @@
 export class Action {
 
   constructor(
-    public id: number,
+    public $key: string,
     public title: string,
     public todo: number,
     public done: number,  // default value 0
@@ -10,7 +10,7 @@ export class Action {
 
   clone() {
     return new Action(
-      this.id,
+      this.$key,
       this.title,
       this.todo,
       this.done,

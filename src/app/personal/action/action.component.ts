@@ -33,13 +33,13 @@ export class ActionComponent {
   ) { }
 
 
-  onSubmit(key: string): void {
-    this.actionService.update(key, this.action);
+  onSubmit(): void {
+    this.actionService.update(this.action);
     this.unsetEdit();
   }
 
-  close(key: string): void {
-      this.action.id = this.actionBackup.id;
+  close(): void {
+      this.action.$key = this.actionBackup.$key;
       this.action.title = this.actionBackup.title;
       this.action.todo = this.actionBackup.todo;
       this.action.done = this.actionBackup.done;
@@ -51,7 +51,7 @@ export class ActionComponent {
 
   setEdit(): void {
     this.actionBackup = new Action(
-      this.action.id,
+      this.action.$key,
       this.action.title,
       this.action.todo,
       this.action.done,
@@ -75,7 +75,7 @@ export class ActionComponent {
   }
 
   onDateChanged(event: any): void {
-    if (event.formatted != '') {
+    if (event.formatted !== '') {
       let formatedDate = moment(event.formatted, 'DD/MM/YYYY');
 
       if (!formatedDate.isValid()) {

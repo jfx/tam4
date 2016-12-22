@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
+
 import { AngularFire } from 'angularfire2';
 
 import { Observable } from 'rxjs/Observable';
@@ -21,11 +22,13 @@ export class ActionService {
   private sprintBacklog;
 
   constructor(private http: Http, private af: AngularFire) {
-    this.sprintBacklog = this.af.database.list('/backlog-sprint');
+    if ((environment.envName === 'TEST') || (environment.envName === 'PROD')) {
+      this.sprintBacklog = this.af.database.list('/backlog-sprint');
+    }
   }
 
   getActions(): Observable<Action[]> {
-    if (environment.envName === 'DEV') {
+    if ((environment.envName !== 'TEST') && (environment.envName !== 'PROD')) {
       return this.http.get(this.actionsInMemoryUrl)
         .map(this.extractData)
         .catch(this.handleError);
@@ -33,22 +36,25 @@ export class ActionService {
     return this.sprintBacklog;
   }
 
-  update(key: string, action: Action): void {
-    if (environment.envName == 'DEV') {
-      const url = `${this.actionsInMemoryUrl}/${action.id}`;
+  update(action: Action): void {
+    if ((environment.envName !== 'TEST') && (environment.envName !== 'PROD')) {
+      const url = `${this.actionsInMemoryUrl}/${action.$key}`;
       this.http
         .put(url, JSON.stringify(action), { headers: this.headers })
         .map(this.extractData)
         .catch(this.handleError);
+    } else {
+      this.sprintBacklog.update(
+        action.$key,
+        {
+          title: action.title,
+          todo: action.todo,
+          done: action.done,
+          description: action.description,
+          date: action.date,
+        }
+      );
     }
-    this.sprintBacklog.update(
-      key, {
-        title: action.title,
-        todo: action.todo,
-        done: action.done,
-        description: action.description,
-        date: action.date,
-      });
   }
 
   private extractData(res: Response) {

@@ -8,6 +8,6 @@ export const environment = {
   envName: 'DEV',
   apiKey: 'not-used',
   authDomain: 'not-used',
-  databaseURL: 'not-used',
+  databaseURL: 'https://not-used.firebaseio.com',
   storageBucket: 'not-used'
 };

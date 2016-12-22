@@ -10,15 +10,26 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
+
 import { Action } from 'app/personal/shared/action.model';
 import { ActionService } from './action.service';
 import { TESTACTIONS } from '../test/fake-action.service';
+
+import { environment } from 'app/../environments/environment';
+export const firebaseConfig = {
+  apiKey: environment.apiKey,
+  authDomain: environment.authDomain,
+  databaseURL: environment.databaseURL,
+  storageBucket: environment.storageBucket
+};
 
 describe('Service: Action', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [HttpModule],
+            imports: [HttpModule, AngularFireModule.initializeApp(firebaseConfig)],
             providers: [
                 ActionService,
                 { provide: XHRBackend, useClass: MockBackend }
@@ -33,9 +44,9 @@ describe('Service: Action', () => {
         })
     );
 
-    it('can instantiate service with "new"', inject([Http], (http: Http) => {
+    it('can instantiate service with "new"', inject([Http, AngularFire], (http: Http, af: AngularFire) => {
         expect(http).not.toBeNull('http should be provided');
-        let service = new ActionService(http);
+        let service = new ActionService(http, af);
         expect(service instanceof ActionService).toBe(true, 'new service should be ok');
     }));
 
@@ -51,9 +62,9 @@ describe('Service: Action', () => {
         let fakeActions: Action[];
         let response: Response;
 
-        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+        beforeEach(inject([Http, XHRBackend, AngularFire], (http: Http, be: MockBackend, af: AngularFire) => {
             backend = be;
-            service = new ActionService(http);
+            service = new ActionService(http, af);
             fakeActions = TESTACTIONS;
             let options = new ResponseOptions({ status: 200, body: { data: fakeActions } });
             response = new Response(options);

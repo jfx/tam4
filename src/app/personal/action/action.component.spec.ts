@@ -5,9 +5,19 @@ import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { AngularFireModule } from 'angularfire2';
+
 import { ActionComponent } from './action.component';
 import { Action } from '../shared/action.model';
 import { ActionService } from 'app/core/service/action/action.service';
+
+import { environment } from 'app/../environments/environment';
+export const firebaseConfig = {
+  apiKey: environment.apiKey,
+  authDomain: environment.authDomain,
+  databaseURL: environment.databaseURL,
+  storageBucket: environment.storageBucket
+};
 
 describe('ActionComponent', () => {
   let component: ActionComponent;
@@ -15,7 +25,7 @@ describe('ActionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, HttpModule],
+      imports: [FormsModule, HttpModule, AngularFireModule.initializeApp(firebaseConfig)],
       declarations: [ActionComponent],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [ActionService]
@@ -26,8 +36,7 @@ describe('ActionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ActionComponent);
     component = fixture.componentInstance;
-
-    component.action = new Action(11, 'Title 1', 1, 2, 'Desc 1', '31/12/2016');
+    component.action = new Action('11', 'Title 1', 1, 2, 'Desc 1', '31/12/2016');
     fixture.detectChanges();
   });
 

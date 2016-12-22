@@ -8,6 +8,10 @@
 /node_modules
 /bower_components
 
+# config
+src/environments/environment.test.ts
+src/environments/environment.prod.ts
+
 # IDEs and editors
 /.idea
 /.vscode
