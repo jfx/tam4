@@ -17,6 +17,10 @@ For test environment: `ng serve --env=test`
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
+## Load tests data
+Prerequisites : Install ts-node and typescript with npm.
+Run `ts-node tests/loadDB.ts` to load data.
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
