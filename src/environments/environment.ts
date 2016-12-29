@@ -6,6 +6,7 @@
 export const environment = {
   production: false,
   envName: 'DEV',
+  version: '0.2.0-beta',
   apiKey: 'not-used',
   authDomain: 'not-used',
   databaseURL: 'https://not-used.firebaseio.com',
