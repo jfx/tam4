@@ -43,6 +43,7 @@ export class ActionComponent {
       this.action.title = this.actionBackup.title;
       this.action.todo = this.actionBackup.todo;
       this.action.done = this.actionBackup.done;
+      this.action.position = this.actionBackup.position;
       this.action.description = this.actionBackup.description;
       this.action.date = this.actionBackup.date;
 
@@ -55,6 +56,7 @@ export class ActionComponent {
       this.action.title,
       this.action.todo,
       this.action.done,
+      this.action.position,
       this.action.description,
       this.action.date
     );

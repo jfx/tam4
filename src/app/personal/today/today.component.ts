@@ -13,18 +13,37 @@ import { ActionService } from 'app/core/service/action/action.service';
 })
 export class TodayComponent implements OnInit {
 
-  actions: Action[];
+  sprintActions: Array<Action>;
+  todayActions: Array<Action> = [];
 
   constructor(private actionService: ActionService) { }
 
   ngOnInit(): void {
-    this.getActions();
+    this.getSprintActions();
+    this.getTodayActions();
   }
 
-  getActions(): void {
+  getSprintActions(): void {
     this.actionService.getActions()
       .map(actions => {
-        this.actions = actions;
+        this.sprintActions = actions;
+      })
+      .toPromise()
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  getTodayActions(): void {
+    this.actionService.getActions()
+      .map(actions => {
+        this.todayActions = actions;
+        // Order by position
+        this.todayActions.sort((a, b): number => {
+          if (a.position < b.position) { return 1; }
+          if (a.position > b.position) { return -1; }
+          return 0;
+        });
       })
       .toPromise()
       .catch(err => {

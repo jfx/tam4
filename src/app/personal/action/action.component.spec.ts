@@ -36,7 +36,7 @@ describe('ActionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ActionComponent);
     component = fixture.componentInstance;
-    component.action = new Action('11', 'Title 1', 1, 2, 'Desc 1', '31/12/2016');
+    component.action = new Action('11', 'Title 1', 1, 2, 1, 'Desc 1', '31/12/2016');
     fixture.detectChanges();
   });
 

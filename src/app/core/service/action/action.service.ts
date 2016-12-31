@@ -50,6 +50,7 @@ export class ActionService {
           title: action.title,
           todo: action.todo,
           done: action.done,
+          position: action.position,
           description: action.description,
           date: action.date,
         }

@@ -21,6 +21,7 @@
         "assets/css/font-awesome.css",
         "assets/css/bootstrap.css",
         "assets/scss/main.scss",
+        "../node_modules/ng2-dnd/style.css",
         "styles.css"
       ],
       "scripts": [

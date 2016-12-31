@@ -6,7 +6,7 @@
       </button>
     </h3>
     <ul class="list-group list-group-sortable-connected">
-      <li *ngFor="let action of actions" class="list-group-item">
+      <li *ngFor="let action of sprintActions" class="list-group-item">
         <app-personal-action [action]="action"></app-personal-action>
       </li>
     </ul>
@@ -17,27 +17,12 @@
         <i onClick="window.alert('Action closed !');" class="fa fa-plus-circle"></i>
       </button>
     </h3>
-    <ul class="list-group list-group-sortable-connected">
-      <li class="list-group-item list-group-item-info">
-        <div class="row">
-          <div class="col-xs-10"><i onClick="window.alert('Action closed !');" class="fa fa-square-o"></i> &nbsp;
-            <a href="www.eco4.io">Cras justo odio dapibus ac facilisis in [In Progress] <span class="tag tag-pill tag-default">1</span></a>
-          </div>
-          <div class="col-xs-2">
-            <span class="tag tag-pill tag-success">1 / 2</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-10">
-            <span class="tag tag-danger">Urgent</span>
-            <span class="tag tag-default">Project 1</span>
-          </div>
-          <div class="col-xs-2">
-            <span class="tag tag-default">21/10/2016</span>
-          </div>
-        </div>
-      </li>
-      <li class="list-group-item list-group-item-success">Vestibulum at eros</li>
-    </ul>
+      <div class="panel-body" dnd-sortable-container [dropZones]="['actions-zone']" [sortableData]="todayActions">
+        <ul class="list-group">
+          <li *ngFor="let todayAction of todayActions; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">
+             <app-personal-action [action]="todayAction"></app-personal-action>
+          </li>
+        </ul>
+    </div>
   </div>
 </div>

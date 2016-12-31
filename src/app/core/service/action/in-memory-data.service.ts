@@ -8,6 +8,7 @@ export class InMemoryDataService implements InMemoryDbService {
         title: '[DEV] Take children to school',
         todo: 1,
         done: 0,
+        position: 6,
         description: 'Before 08:35',
         date: ''
       },
@@ -16,6 +17,7 @@ export class InMemoryDataService implements InMemoryDbService {
         title: '[DEV] Stand-up meeting',
         todo: 1,
         done: 0,
+        position: 5,
         description: 'At 10:00',
         date: ''
       },
@@ -24,6 +26,7 @@ export class InMemoryDataService implements InMemoryDbService {
         title: '[DEV] Prepare Continuous Delivery presentation',
         todo: 4,
         done: 1,
+        position: 4,
         description: '#10 slides',
         date: '2016-12-09'
       },
@@ -32,6 +35,7 @@ export class InMemoryDataService implements InMemoryDbService {
         title: '[DEV] Write Docker best practices',
         todo: 5,
         done: 0,
+        position: 3,
         description: '',
         date: '2016-12-16'
       },
@@ -40,6 +44,7 @@ export class InMemoryDataService implements InMemoryDbService {
         title: '[DEV] Read "Scaling Lean & Agile Development"',
         todo: 10,
         done: 1,
+        position: 2,
         description: '',
         date: '2016-12-31'
       },
@@ -48,6 +53,7 @@ export class InMemoryDataService implements InMemoryDbService {
         title: '[DEV] Learn "Introduction to TypeScript" course with very very long title and some other things',
         todo: 6,
         done: 0,
+        position: 1,
         description: '',
         date: '2016-12-31'
       },
