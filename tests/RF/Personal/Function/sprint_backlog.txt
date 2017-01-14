@@ -1,0 +1,48 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          ../Conf/personal.txt
+Resource          ../Conf/sprint_backlog.txt
+
+*** Keywords ***
+I wait for actions in Sprint Backlog
+    Wait Until Page Contains    ${ACTION1.title}
+
+I click edit button
+    [Arguments]    &{action}
+    Click Element    ${ACTION_VIEW.edit_button}_${action.position}
+
+I click edit link
+    [Arguments]    &{action}
+    Click Link    ${ACTION_VIEW.edit_link}_${action.position}
+
+I click save button
+    [Arguments]    &{action}
+    Click Button    ${ACTION_EDIT.save}_${action.position}
+
+I click close button
+    [Arguments]    &{action}
+    Click Button    ${ACTION_EDIT.close}_${action.position}
+
+Following elements of action are displayed
+    [Arguments]    &{action}
+    Page Should Contain    [${ENV}] ${action.title}
+    Element Should Contain    ${ACTION_VIEW.todo_pill}_${action.position}    ${action.todo}
+    ${total}=    Evaluate    ${action.todo} + ${action.done}
+    Element Should Contain    ${ACTION_VIEW.done_pill}_${action.position}    ${action.done} / ${total}
+    Element Should Contain    ${ACTION_VIEW.date_pill}_${action.position}    ${action.date}
+
+Action form should contain
+    [Arguments]    &{action}
+    Textfield Value Should Be    ${ACTION_EDIT.title}_${action.position}    [${ENV}] ${action.title}
+    Date should be    ${ACTION_EDIT.date}_${action.position}    ${action.date}
+    Element should have model value    ${ACTION_EDIT.todo}_${action.position}    ${action.todo}
+    Element should have model value    ${ACTION_EDIT.done}_${action.position}    ${action.done}
+    Textarea Value Should Be    ${ACTION_EDIT.desc}_${action.position}    ${action.description}
+
+I input values in action form
+    [Arguments]    &{action}
+    Input Text    ${ACTION_EDIT.title}_${action.position}    [${ENV}] ${action.title}
+    Input Text    xpath=(//my-date-picker[@id='${ACTION_EDIT.date}_${action.position}'])[1]//input    ${action.date}
+    Input Text    ${ACTION_EDIT.todo}_${action.position}    ${action.todo}
+    Input Text    ${ACTION_EDIT.done}_${action.position}    ${action.done}
+    Comment    Textarea Value Should Be    ${ACTION_EDIT.desc}_${action.position}    ${action.description}

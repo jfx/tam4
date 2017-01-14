@@ -1,0 +1,10 @@
+*** Variables ***
+${URL}            http://localhost:4200
+${REMOTE}         False
+${BROWSER}        gc
+${HUB}            http://xyz.xyz.xyz.xyz:4444/wd/hub
+${DC_VERSION}     ${EMPTY}
+${DC_OS}          LINUX
+${SHORT_SLEEP}    2s
+${TIMEOUT}        5s
+${ENV}            TEST

@@ -1,49 +1,49 @@
 <div [hidden]="edit">
   <div class="row">
     <i onClick="window.alert('Action closed !');" class="fa fa-square-o"></i>
-    <i onClick="window.alert('Action closed !');" class="fa fa-area-chart"></i>
-    <i (click)="setEdit()" class="fa fa-edit"></i>
-    <i onClick="window.alert('Action closed !');" class="fa fa-times"></i>&nbsp;
-    <a href="javascript:void(0)" (click)="setEdit()" tooltipPlacement="bottom" tooltip="{{ action.description }}">{{ action.title }} <span class="tag tag-pill tag-default">{{ action.todo }}</span></a>
+    <i onClick="window.alert('Action chart !');" class="fa fa-area-chart"></i>
+    <i id="sb_i_action_edit_{{ action.position }}" (click)="setEdit()" class="fa fa-edit"></i>
+    <i onClick="window.alert('Action removed !');" class="fa fa-times"></i>&nbsp;
+    <a id="sb_l_action_edit_{{ action.position }}" href="javascript:void(0)" (click)="setEdit()" tooltipPlacement="bottom" tooltip="{{ action.description }}">{{ action.title }} <span id="sb_p_action_todo_{{ action.position }}" class="tag tag-pill tag-default">{{ action.todo }}</span></a>
   </div>
   <div class="row">
     <span class="tag tag-danger">Urgent</span>
     <span class="tag tag-default">Project 1</span>
     <div class="float-xs-right">
-      <span class="tag tag-pill tag-success">
+      <span id="sb_p_action_done_{{ action.position }}" class="tag tag-pill tag-success">
         {{ action.done }} / {{ action.todo + action.done }}
       </span>
-      <span class="tag tag-pill tag-default">{{ displayDate() }}</span>
+      <span id="sb_p_action_date_{{ action.position }}" class="tag tag-pill tag-default">{{ displayDate() }}</span>
     </div>
   </div>
 </div>
 <div [hidden]="!edit">
   <form (ngSubmit)="onSubmit()" #actionForm="ngForm">
     <div class="form-group">
-      <label class="sr-only" for="title">Title</label>
-      <input type="text" class="form-control" id="title" required [(ngModel)]="action.title" name="title" placeholder="Title">
+      <label class="sr-only" for="sb_edit_title_{{ action.position }}">Title</label>
+      <input type="text" class="form-control" id="sb_edit_title_{{ action.position }}" required [(ngModel)]="action.title" name="title" placeholder="Title">
     </div>
     <div class="form-group row">
       <label class="col-xs-3 col-form-label">Due date</label>
       <div class="col-xs-4">
-        <my-date-picker [selDate]="displayDate()" [options]="myDatePickerNormalOptions" (dateChanged)="onDateChanged($event)"></my-date-picker>
+        <my-date-picker id="sb_edit_date_{{ action.position }}" [selDate]="displayDate()" [options]="myDatePickerNormalOptions" (dateChanged)="onDateChanged($event)"></my-date-picker>
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-xs-3 col-form-label" for="todo">Todo</label>
+      <label class="col-xs-3 col-form-label" for="sb_edit_todo_{{ action.position }}">Todo</label>
       <div class="col-xs-3">
-        <input type="number" class="form-control" id="todo" required [(ngModel)]="action.todo" name="todo">
+        <input type="number" class="form-control" id="sb_edit_todo_{{ action.position }}" required [(ngModel)]="action.todo" name="todo">
       </div>
-      <label class="col-xs-3 col-form-label" for="done">Done</label>
+      <label class="col-xs-3 col-form-label" for="sb_edit_done_{{ action.position }}">Done</label>
       <div class="col-xs-3">
-        <input type="number" class="form-control" id="done" required [(ngModel)]="action.done" name="done">
+        <input type="number" class="form-control" id="sb_edit_done_{{ action.position }}" required [(ngModel)]="action.done" name="done">
       </div>
     </div>
     <div class="form-group">
-      <label class="sr-only" for="desc">Description</label>
-      <textarea type="text" class="form-control" id="desc" [(ngModel)]="action.description" name="desc" rows="4" placeholder="Description"></textarea>
+      <label class="sr-only" for="sb_edit_desc_{{ action.position }}">Description</label>
+      <textarea type="text" class="form-control" id="sb_edit_desc_{{ action.position }}" [(ngModel)]="action.description" name="desc" rows="4" placeholder="Description"></textarea>
     </div>
-    <button type="submit" class="btn btn-success" [disabled]="!actionForm.form.valid">Save</button>
-    <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+    <button id="sb_b_save_{{ action.position }}" type="submit" class="btn btn-success" [disabled]="!actionForm.form.valid">Save</button>
+    <button id="sb_b_close_{{ action.position }}" type="button" class="btn btn-secondary" (click)="close()">Close</button>
   </form>
 </div>

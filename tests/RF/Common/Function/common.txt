@@ -1,0 +1,29 @@
+*** Settings ***
+Library           OperatingSystem
+Library           Selenium2Library
+Resource          ../Conf/common.txt
+
+*** Keywords ***
+I go to site
+    Run Keyword If    ${REMOTE}    Open Browser    ${URL}    ${BROWSER}    remote_url=${HUB}
+    Run Keyword Unless    ${REMOTE}    Open Browser    ${URL}    ${BROWSER}
+    Maximize Browser Window
+
+Element should have model value
+    [Arguments]    ${id}    ${value}
+    ${attr-model}=    Get Element Attribute    ${id}@ng-reflect-model
+    Should Be Equal    ${attr-model}    ${value}
+
+Date should be
+    [Arguments]    ${id}    ${value}
+    ${attr-value}=    Get Element Attribute    xpath=(//my-date-picker[@id='${id}'])[1]//input@ng-reflect-value
+    Should Be Equal    ${attr-value}    ${value}
+
+Load data in DB
+    ${rc} =    Run And Return Rc    ts-node ${CURDIR}/../../../loadDB.ts
+    Should Be Equal As Integers     ${rc}     0
+
+Teardown
+    Close All Browsers
+    : FOR    ${tag}    IN    @{TEST TAGS}
+    \    Run Keyword If    '${tag}' == 'EDIT'    Load data in DB

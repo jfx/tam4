@@ -1,0 +1,7 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          ../Conf/personal.txt
+
+*** Keywords ***
+I go to Personal
+    Go to    ${URL}${location_personal}
