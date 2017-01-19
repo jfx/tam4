@@ -5,7 +5,10 @@ Resource          ../Conf/sprint_backlog.txt
 
 *** Keywords ***
 I wait for actions in Sprint Backlog
-    Wait Until Page Contains    ${ACTION1.title}
+    Wait Until Page Contains    ${ACTION1.title}    timeout=${TIMEOUT}
+
+I click add button
+    Click Button    sb_b_action_add
 
 I click edit button
     [Arguments]    &{action}

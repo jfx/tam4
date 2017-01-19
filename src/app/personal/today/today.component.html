@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-sm-6">
     <h3 class="text-xs-center"> Sprint backlog
-      <button type="button" class="btn btn-secondary btn-sm">
-        <i onClick="window.alert('Action closed !');" class="fa fa-plus-circle"></i>
+      <button id="sb_b_action_add" (click)="add2Sprint()" type="button" class="btn btn-secondary btn-sm">
+        <i class="fa fa-plus-circle"></i>
       </button>
     </h3>
     <ul class="list-group list-group-sortable-connected">
       <li *ngFor="let action of sprintActions" class="list-group-item">
-        <app-personal-action [action]="action"></app-personal-action>
+        <app-personal-action [action]="action" [arrayActions]="sprintActions"></app-personal-action>
       </li>
     </ul>
   </div>

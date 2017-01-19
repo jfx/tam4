@@ -45,6 +45,7 @@ export class TodayComponent implements OnInit {
     this.actionService.getActions()
       .map(actions => {
         this.sprintActions = actions;
+        this.sortArrayActions(this.sprintActions);
       })
       .toPromise()
       .catch(err => {
@@ -56,16 +57,40 @@ export class TodayComponent implements OnInit {
     this.actionService.getActions()
       .map(actions => {
         this.todayActions = actions;
-        // Order by position
-        this.todayActions.sort((a, b): number => {
-          if (a.position < b.position) { return 1; }
-          if (a.position > b.position) { return -1; }
-          return 0;
-        });
+        this.sortArrayActions(this.todayActions);
       })
       .toPromise()
       .catch(err => {
         console.error(err);
       });
+  }
+
+  add2Sprint(): void {
+    let position = this.getNextAvalaiblePosition(this.sprintActions);
+    let action = new Action('', '', 1, 0, position, '', '');
+    this.sprintActions.push(action);
+    this.sortArrayActions(this.sprintActions);
+  }
+
+  sortArrayActions(arrayActions: Array<Action>): void {
+    arrayActions.sort((a, b): number => {
+      if (a.position < b.position) { return 1; }
+      if (a.position > b.position) { return -1; }
+      return 0;
+    });
+  }
+
+  getNextAvalaiblePosition(arrayActions: Array<Action>): number {
+    if (arrayActions.length === 0) {
+      return 1;
+    } else {
+      let maxPosition = -100000000;
+      for (let i = 0; i < arrayActions.length; i++) {
+        if (arrayActions[i].position > maxPosition) {
+          maxPosition = arrayActions[i].position;
+        }
+      }
+      return Math.ceil(maxPosition + 1);
+    }
   }
 }

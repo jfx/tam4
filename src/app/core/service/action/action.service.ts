@@ -19,7 +19,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 
-import { AngularFire } from 'angularfire2';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -37,7 +37,7 @@ export class ActionService {
   private actionsInMemoryUrl = 'app/actions';  // URL to web api
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  private sprintBacklog;
+  private sprintBacklog: FirebaseListObservable<any>;
 
   constructor(private http: Http, private af: AngularFire) {
     if ((environment.envName === 'TEST') || (environment.envName === 'PROD')) {
@@ -52,6 +52,26 @@ export class ActionService {
         .catch(this.handleError);
     }
     return this.sprintBacklog;
+  }
+
+  create(action: Action): void {
+    if ((environment.envName !== 'TEST') && (environment.envName !== 'PROD')) {
+      this.http
+        .post(this.actionsInMemoryUrl, JSON.stringify(action), { headers: this.headers })
+        .map(this.extractData)
+        .catch(this.handleError);
+    } else {
+      this.sprintBacklog.push(
+        {
+          title: action.title,
+          todo: action.todo,
+          done: action.done,
+          position: action.position,
+          description: action.description,
+          date: action.date,
+        }
+      );
+    }
   }
 
   update(action: Action): void {

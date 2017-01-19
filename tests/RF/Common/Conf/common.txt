@@ -6,5 +6,5 @@ ${HUB}            http://xyz.xyz.xyz.xyz:4444/wd/hub
 ${DC_VERSION}     ${EMPTY}
 ${DC_OS}          LINUX
 ${SHORT_SLEEP}    2s
-${TIMEOUT}        5s
+${TIMEOUT}        10s
 ${ENV}            TEST

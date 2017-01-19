@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with tam4. If not, see <http://www.gnu.org/licenses/>.
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -31,12 +31,14 @@ import { Action } from '../shared/action.model';
   templateUrl: './action.component.html',
   styleUrls: ['./action.component.css']
 })
-export class ActionComponent {
+export class ActionComponent implements OnInit {
 
   @Input()
   action: Action;
-  actionBackup: Action;
+  @Input()
+  arrayActions: Array<Action>;
   edit: boolean = false;
+  actionBackup: Action;
 
   private myDatePickerNormalOptions = {
     dateFormat: 'dd/mm/yyyy',
@@ -46,17 +48,31 @@ export class ActionComponent {
     minYear: 2016,
   };
 
-  constructor(
-    private actionService: ActionService
-  ) { }
+  constructor(private actionService: ActionService) {
+  }
 
+  ngOnInit() {
+    // Add -> open edit form
+    if (this.isAdd()) {
+      this.edit = true;
+    }
+  }
 
   onSubmit(): void {
-    this.actionService.update(this.action);
+    if (this.isAdd()) {
+      this.actionService.create(this.action);
+    } else {
+      this.actionService.update(this.action);
+    }
     this.unsetEdit();
   }
 
   close(): void {
+    // Add -> remove it from Array
+    if (this.isAdd()) {
+      let index = this.arrayActions.findIndex(action => action.$key === '');
+      this.arrayActions.splice(index, 1);
+    } else {
       this.action.$key = this.actionBackup.$key;
       this.action.title = this.actionBackup.title;
       this.action.todo = this.actionBackup.todo;
@@ -65,7 +81,8 @@ export class ActionComponent {
       this.action.description = this.actionBackup.description;
       this.action.date = this.actionBackup.date;
 
-    this.unsetEdit();
+      this.unsetEdit();
+    }
   }
 
   setEdit(): void {
@@ -105,5 +122,9 @@ export class ActionComponent {
     } else {
       this.action.date = '';
     }
+  }
+
+  isAdd(): boolean {
+    return this.action.$key === '';
   }
 }

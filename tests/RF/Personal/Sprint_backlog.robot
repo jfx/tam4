@@ -56,3 +56,24 @@ Modification of action can be undone by pressing close button
     And I click close button    &{ACTION2}
     Then following elements of action are displayed    &{ACTION2}
     [Teardown]    Teardown
+
+Action can be added with a form
+    [Tags]    EDIT
+    Given I go to site
+    And I go to Personal
+    And I wait for actions in Sprint Backlog
+    When I click add button
+    And I input values in action form    &{ACTION3ADD}
+    And I click save button    &{ACTION3ADD}
+    Then following elements of action are displayed    &{ACTION3ADD}
+    [Teardown]    Teardown
+
+Adding an action can be undone by pressing close button
+    Given I go to site
+    And I go to Personal
+    And I wait for actions in Sprint Backlog
+    When I click add button
+    And I input values in action form    &{ACTION3ADD}
+    And I click close button    &{ACTION3ADD}
+    Then Page Should Not Contain    ${ACTION3ADD.title}
+    [Teardown]    Teardown
