@@ -3,5 +3,6 @@
 &{ACTION2}        title=Read "Scaling Lean & Agile Development"    todo=10    done=1    position=2    description=Description of action    date=31/12/2016
 &{ACTION2MOD}     title=Read "Scaling Lean & Agile Development Mod"    todo=11    done=2    position=2    description=Description of modified action    date=31/01/2017
 &{ACTION3ADD}     title=Title of added action    todo=5    done=3    position=7    description=Description of added action    date=31/01/2017
-&{ACTION_VIEW}    edit_button=sb_i_action_edit    edit_link=sb_l_action_edit    todo_pill=sb_p_action_todo    done_pill=sb_p_action_done    date_pill=sb_p_action_date
+&{ACTION_VIEW}    edit_button=sb_i_action_edit    delete_button=sb_i_action_del    edit_link=sb_l_action_edit    todo_pill=sb_p_action_todo    done_pill=sb_p_action_done    date_pill=sb_p_action_date
 &{ACTION_EDIT}    title=sb_edit_title    todo=sb_edit_todo    done=sb_edit_done    date=sb_edit_date    desc=sb_edit_desc    save=sb_b_save    close=sb_b_close
+&{ACTION_MODAL}    message=You are about to delete this action:    close=sb_modal_b_close    yes=sb_modal_b_delete    no=sb_modal_b_cancel

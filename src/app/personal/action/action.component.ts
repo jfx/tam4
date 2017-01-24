@@ -16,10 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with tam4. If not, see <http://www.gnu.org/licenses/>.
  */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
+
+import { ModalDirective } from 'ng2-bootstrap';
 
 import * as moment from 'moment';
 
@@ -37,6 +39,8 @@ export class ActionComponent implements OnInit {
   action: Action;
   @Input()
   arrayActions: Array<Action>;
+  @ViewChild('deleteModal')
+  public deleteModal: ModalDirective;
   edit: boolean = false;
   actionBackup: Action;
 
@@ -122,6 +126,18 @@ export class ActionComponent implements OnInit {
     } else {
       this.action.date = '';
     }
+  }
+
+  public showDeleteModal(): void {
+    this.deleteModal.show();
+  }
+
+  public hideDeleteModal(): void {
+    this.deleteModal.hide();
+  }
+
+  delete(): void {
+    this.actionService.delete(this.action);
   }
 
   isAdd(): boolean {

@@ -3,8 +3,8 @@
     <i onClick="window.alert('Action closed !');" class="fa fa-square-o"></i>
     <i onClick="window.alert('Action chart !');" class="fa fa-area-chart"></i>
     <i id="sb_i_action_edit_{{ action.position }}" (click)="setEdit()" class="fa fa-edit"></i>
-    <i onClick="window.alert('Action removed !');" class="fa fa-times"></i>&nbsp;
-    <a id="sb_l_action_edit_{{ action.position }}" href="javascript:void(0)" (click)="setEdit()" tooltipPlacement="bottom" tooltip="{{ action.description }}">{{ action.title }} <span id="sb_p_action_todo_{{ action.position }}" class="tag tag-pill tag-default">{{ action.todo }}</span></a>
+    <i id="sb_i_action_del_{{ action.position }}" (click)="showDeleteModal()" class="fa fa-times"></i>&nbsp;
+    <a id="sb_l_action_edit_{{ action.position }}" href="javascript:void(0)" (click)="setEdit()" placement="bottom" tooltip="{{ action.description }}">{{ action.title }} <span id="sb_p_action_todo_{{ action.position }}" class="tag tag-pill tag-default">{{ action.todo }}</span></a>
   </div>
   <div class="row">
     <span class="tag tag-danger">Urgent</span>
@@ -21,7 +21,8 @@
   <form (ngSubmit)="onSubmit()" #actionForm="ngForm">
     <div class="form-group">
       <label class="sr-only" for="sb_edit_title_{{ action.position }}">Title</label>
-      <input type="text" class="form-control" id="sb_edit_title_{{ action.position }}" required [(ngModel)]="action.title" name="title" placeholder="Title">
+      <input type="text" class="form-control" id="sb_edit_title_{{ action.position }}" required [(ngModel)]="action.title" name="title"
+        placeholder="Title">
     </div>
     <div class="form-group row">
       <label class="col-xs-3 col-form-label">Due date</label>
@@ -41,9 +42,30 @@
     </div>
     <div class="form-group">
       <label class="sr-only" for="sb_edit_desc_{{ action.position }}">Description</label>
-      <textarea type="text" class="form-control" id="sb_edit_desc_{{ action.position }}" [(ngModel)]="action.description" name="desc" rows="4" placeholder="Description"></textarea>
+      <textarea type="text" class="form-control" id="sb_edit_desc_{{ action.position }}" [(ngModel)]="action.description" name="desc"
+        rows="4" placeholder="Description"></textarea>
     </div>
     <button id="sb_b_save_{{ action.position }}" type="submit" class="btn btn-success" [disabled]="!actionForm.form.valid">Save</button>
     <button id="sb_b_close_{{ action.position }}" type="button" class="btn btn-secondary" (click)="close()">Close</button>
   </form>
+</div>
+<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-mm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Delete action</h4>
+        <button id="sb_modal_b_close_{{ action.position }}" type="button" class="close pull-right" aria-label="Close" (click)="hideDeleteModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>You are about to delete this action: "<i>{{ action.title }}</i>".</p>
+        <p>Do you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="sb_modal_b_delete_{{ action.position }}" type="button" class="btn btn-danger" (click)="delete()">Yes</button>
+        <button id="sb_modal_b_cancel_{{ action.position }}" type="button" class="btn btn-secondary" (click)="hideDeleteModal()">No</button>
+      </div>
+    </div>
+  </div>
 </div>

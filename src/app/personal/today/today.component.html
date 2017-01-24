@@ -20,7 +20,7 @@
       <div class="panel-body" dnd-sortable-container [dropZones]="['actions-zone']" [sortableData]="todayActions">
         <ul class="list-group">
           <li *ngFor="let todayAction of todayActions; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">
-             <app-personal-action [action]="todayAction"></app-personal-action>
+             <app-personal-action [action]="todayAction" [arrayActions]="sprintActions"></app-personal-action>
           </li>
         </ul>
     </div>

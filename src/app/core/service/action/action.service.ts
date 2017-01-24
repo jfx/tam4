@@ -96,6 +96,18 @@ export class ActionService {
     }
   }
 
+  delete(action: Action): void {
+    if ((environment.envName !== 'TEST') && (environment.envName !== 'PROD')) {
+      const url = `${this.actionsInMemoryUrl}/${action.$key}`;
+      this.http
+        .delete(url, { headers: this.headers })
+        .map(this.extractData)
+        .catch(this.handleError);
+    } else {
+      this.sprintBacklog.remove(action.$key);
+    }
+  }
+
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {
       throw new Error('Bad response status: ' + res.status);

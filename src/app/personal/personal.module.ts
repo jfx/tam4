@@ -18,7 +18,8 @@
  */
 import { NgModule } from '@angular/core';
 
-import { TooltipModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { ModalModule } from 'ng2-bootstrap/modal';
+import { TooltipModule } from 'ng2-bootstrap/tooltip';
 
 import { MyDatePickerModule } from 'mydatepicker';
 
@@ -31,7 +32,8 @@ import { TodayComponent } from './today/today.component';
 @NgModule({
   imports: [
     MyDatePickerModule,
-    TooltipModule,
+    ModalModule.forRoot(),
+    TooltipModule.forRoot(),
     PersonalRoutingModule,
     SharedModule,
   ],
