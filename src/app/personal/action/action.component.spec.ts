@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AngularFireModule } from 'angularfire2';
+import { ModalModule } from 'ng2-bootstrap/modal';
 
 import { ActionComponent } from './action.component';
 import { Action } from '../shared/action.model';
@@ -25,7 +26,12 @@ describe('ActionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, HttpModule, AngularFireModule.initializeApp(firebaseConfig)],
+      imports: [
+        FormsModule,
+        HttpModule,
+        AngularFireModule.initializeApp(firebaseConfig),
+        ModalModule.forRoot(),
+      ],
       declarations: [ActionComponent],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [ActionService]

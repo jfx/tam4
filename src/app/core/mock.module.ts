@@ -18,23 +18,26 @@
  */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { DndModule } from 'ng2-dnd';
+
+// Necessary for in-memory-web-api
+import { HttpModule } from '@angular/http';
+
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './service/action/in-memory-data.service';
+
+import { ActionService } from './service/action/action.service';
+import { ActionMockService } from './service/action/action.mock.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    DndModule.forRoot(),
+    HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   declarations: [
   ],
   exports: [
-    CommonModule,
-    FormsModule,
-    DndModule,
   ],
-  providers: [],
-  bootstrap: []
+  providers: [{ provide: ActionService, useClass: ActionMockService }]
 })
-export class SharedModule { }
+export class MockModule { }

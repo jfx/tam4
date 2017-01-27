@@ -10,28 +10,17 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFire } from 'angularfire2';
-
 import { Action } from 'app/personal/shared/action.model';
-import { ActionService } from './action.service';
+import { ActionMockService } from './action.mock.service';
 import { TESTACTIONS } from '../test/fake-action.service';
-
-import { environment } from 'app/../environments/environment';
-export const firebaseConfig = {
-  apiKey: environment.apiKey,
-  authDomain: environment.authDomain,
-  databaseURL: environment.databaseURL,
-  storageBucket: environment.storageBucket
-};
 
 describe('Service: Action', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [HttpModule, AngularFireModule.initializeApp(firebaseConfig)],
+            imports: [HttpModule],
             providers: [
-                ActionService,
+                ActionMockService,
                 { provide: XHRBackend, useClass: MockBackend }
             ]
         })
@@ -39,15 +28,15 @@ describe('Service: Action', () => {
     }));
 
     it('can instantiate service when inject service',
-        inject([ActionService], (service: ActionService) => {
-            expect(service instanceof ActionService).toBe(true);
+        inject([ActionMockService], (service: ActionMockService) => {
+            expect(service instanceof ActionMockService).toBe(true);
         })
     );
 
-    it('can instantiate service with "new"', inject([Http, AngularFire], (http: Http, af: AngularFire) => {
+    it('can instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
-        let service = new ActionService(http, af);
-        expect(service instanceof ActionService).toBe(true, 'new service should be ok');
+        const service = new ActionMockService(http);
+        expect(service instanceof ActionMockService).toBe(true, 'new service should be ok');
     }));
 
     it('can provide the mockBackend as XHRBackend',
@@ -58,15 +47,15 @@ describe('Service: Action', () => {
 
     describe('when getHeroes', () => {
         let backend: MockBackend;
-        let service: ActionService;
+        let service: ActionMockService;
         let fakeActions: Action[];
         let response: Response;
 
-        beforeEach(inject([Http, XHRBackend, AngularFire], (http: Http, be: MockBackend, af: AngularFire) => {
+        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
             backend = be;
-            service = new ActionService(http, af);
+            service = new ActionMockService(http);
             fakeActions = TESTACTIONS;
-            let options = new ResponseOptions({ status: 200, body: { data: fakeActions } });
+            const options = new ResponseOptions({ status: 200, body: { data: fakeActions } });
             response = new Response(options);
         }));
 
@@ -82,7 +71,7 @@ describe('Service: Action', () => {
         })));
 
         it('should be OK returning no heroes', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({ status: 200, body: { data: [] } }));
+            const resp = new Response(new ResponseOptions({ status: 200, body: { data: [] } }));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
             service.getActions()
@@ -93,7 +82,7 @@ describe('Service: Action', () => {
         })));
 
         it('should treat 404 as an error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({ status: 404 }));
+            const resp = new Response(new ResponseOptions({ status: 404 }));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
             service.getActions()

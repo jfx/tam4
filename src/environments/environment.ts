@@ -5,8 +5,9 @@
 
 export const environment = {
   production: false,
+  mock: true,
   envName: 'DEV',
-  version: '0.2.0',
+  version: '0.3.0-beta',
   apiKey: 'not-used',
   authDomain: 'not-used',
   databaseURL: 'https://not-used.firebaseio.com',

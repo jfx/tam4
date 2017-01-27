@@ -27,12 +27,14 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 import { CoreModule } from './core/core.module';
+import { MockModule } from './core/mock.module';
 import { HomeModule } from './home/home.module';
 import { PersonalModule } from './personal/personal.module';
 import { SharedModule } from './shared/shared.module';
 
-@NgModule({
-  imports: [
+import { environment } from 'app/../environments/environment';
+
+const importedModules: Array<any> = [
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -41,7 +43,15 @@ import { SharedModule } from './shared/shared.module';
     HomeModule,
     PersonalModule,
     SharedModule,
-  ],
+];
+
+if (environment.mock) {
+   console.log('Enabling mocked services.');
+   importedModules.push(MockModule);
+}
+
+@NgModule({
+  imports: importedModules,
   declarations: [
     AppComponent,
     NavbarComponent,

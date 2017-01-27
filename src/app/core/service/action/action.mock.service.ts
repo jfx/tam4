@@ -17,57 +17,53 @@
  * along with tam4. If not, see <http://www.gnu.org/licenses/>.
  */
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
-
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { Headers, Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
+
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 import { environment } from 'app/../environments/environment';
 
 import { Action } from 'app/personal/shared/action.model';
 
 @Injectable()
-export class ActionService {
-  private sprintBacklog: FirebaseListObservable<any>;
+export class ActionMockService {
+  private actionsInMemoryUrl = 'app/actions';  // URL to web api
+  private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private af: AngularFire) {
-    this.sprintBacklog = this.af.database.list('/backlog-sprint');
-  }
+  constructor(private http: Http) { }
 
   getActions(): Observable<Action[]> {
-    return this.sprintBacklog;
+    return this.http.get(this.actionsInMemoryUrl)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   create(action: Action): void {
-    this.sprintBacklog.push(
-      {
-        title: action.title,
-        todo: action.todo,
-        done: action.done,
-        position: action.position,
-        description: action.description,
-        date: action.date,
-      }
-    );
+    this.http
+      .post(this.actionsInMemoryUrl, JSON.stringify(action), { headers: this.headers })
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   update(action: Action): void {
-    this.sprintBacklog.update(
-      action.$key,
-      {
-        title: action.title,
-        todo: action.todo,
-        done: action.done,
-        position: action.position,
-        description: action.description,
-        date: action.date,
-      }
-    );
+    const url = `${this.actionsInMemoryUrl}/${action.$key}`;
+    this.http
+      .put(url, JSON.stringify(action), { headers: this.headers })
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   delete(action: Action): void {
-    this.sprintBacklog.remove(action.$key);
+    const url = `${this.actionsInMemoryUrl}/${action.$key}`;
+    this.http
+      .delete(url, { headers: this.headers })
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   private extractData(res: Response) {
