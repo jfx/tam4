@@ -30,16 +30,22 @@ import { Action } from 'app/personal/shared/action.model';
 @Injectable()
 export class ActionService {
   private sprintBacklog: FirebaseListObservable<any>;
+  private todayBacklog: FirebaseListObservable<any>;
 
   constructor(private af: AngularFire) {
     this.sprintBacklog = this.af.database.list('/backlog-sprint');
+    this.todayBacklog = this.af.database.list('/backlog-today');
   }
 
-  getActions(): Observable<Action[]> {
+  getSprintActions(): Observable<Action[]> {
     return this.sprintBacklog;
   }
 
-  create(action: Action): void {
+  getTodayActions(): Observable<Action[]> {
+    return this.todayBacklog;
+  }
+
+  createInSprint(action: Action): void {
     this.sprintBacklog.push(
       {
         title: action.title,
@@ -52,7 +58,7 @@ export class ActionService {
     );
   }
 
-  update(action: Action): void {
+  updateInSprint(action: Action): void {
     this.sprintBacklog.update(
       action.$key,
       {
@@ -66,7 +72,7 @@ export class ActionService {
     );
   }
 
-  delete(action: Action): void {
+  deleteInSprint(action: Action): void {
     this.sprintBacklog.remove(action.$key);
   }
 

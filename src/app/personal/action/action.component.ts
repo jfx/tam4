@@ -64,9 +64,9 @@ export class ActionComponent implements OnInit {
 
   onSubmit(): void {
     if (this.isAdd()) {
-      this.actionService.create(this.action);
+      this.actionService.createInSprint(this.action);
     } else {
-      this.actionService.update(this.action);
+      this.actionService.updateInSprint(this.action);
     }
     this.unsetEdit();
   }
@@ -74,7 +74,7 @@ export class ActionComponent implements OnInit {
   close(): void {
     // Add -> remove it from Array
     if (this.isAdd()) {
-      let index = this.arrayActions.findIndex(action => action.$key === '');
+      const index = this.arrayActions.findIndex(action => action.$key === '');
       this.arrayActions.splice(index, 1);
     } else {
       this.action.$key = this.actionBackup.$key;
@@ -107,7 +107,7 @@ export class ActionComponent implements OnInit {
   }
 
   displayDate(): string {
-    let sqlDate = moment(this.action.date, 'YYYY-MM-DD');
+    const sqlDate = moment(this.action.date, 'YYYY-MM-DD');
 
     if (!sqlDate.isValid()) {
       return '';
@@ -117,7 +117,7 @@ export class ActionComponent implements OnInit {
 
   onDateChanged(event: any): void {
     if (event.formatted !== '') {
-      let formatedDate = moment(event.formatted, 'DD/MM/YYYY');
+      const formatedDate = moment(event.formatted, 'DD/MM/YYYY');
 
       if (!formatedDate.isValid()) {
         this.action.date = '';
@@ -137,7 +137,7 @@ export class ActionComponent implements OnInit {
   }
 
   delete(): void {
-    this.actionService.delete(this.action);
+    this.actionService.deleteInSprint(this.action);
   }
 
   isAdd(): boolean {

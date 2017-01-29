@@ -20,8 +20,8 @@ Date should be
     Should Be Equal    ${attr-value}    ${value}
 
 Load data in DB
-    ${rc} =    Run And Return Rc    ts-node ${CURDIR}/../../../loadDB.ts
-    Should Be Equal As Integers     ${rc}     0
+    ${rc} =    Run And Return Rc    ${CURDIR}/../../../data/loadDB.sh
+    Should Be Equal As Integers    ${rc}    0
 
 Teardown
     Close All Browsers

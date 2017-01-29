@@ -42,7 +42,7 @@ export class TodayComponent implements OnInit {
   }
 
   getSprintActions(): void {
-    this.actionService.getActions()
+    this.actionService.getSprintActions()
       .map(actions => {
         this.sprintActions = actions;
         this.sortArrayActions(this.sprintActions);
@@ -54,7 +54,7 @@ export class TodayComponent implements OnInit {
   }
 
   getTodayActions(): void {
-    this.actionService.getActions()
+    this.actionService.getTodayActions()
       .map(actions => {
         this.todayActions = actions;
         this.sortArrayActions(this.todayActions);
@@ -66,8 +66,8 @@ export class TodayComponent implements OnInit {
   }
 
   add2Sprint(): void {
-    let position = this.getNextAvalaiblePosition(this.sprintActions);
-    let action = new Action('', '', 1, 0, position, '', '');
+    const position = this.getNextAvalaiblePosition(this.sprintActions);
+    const action = new Action('', '', 1, 0, position, '', '');
     this.sprintActions.push(action);
     this.sortArrayActions(this.sprintActions);
   }
