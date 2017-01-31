@@ -27,7 +27,7 @@ export class Action {
     public description?: string,
     public date?: string) { }
 
-  clone() {
+  clone(): Action {
     return new Action(
       this.$key,
       this.title,

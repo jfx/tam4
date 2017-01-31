@@ -27,7 +27,7 @@ const todayActions = [
         title: '[TEST] Stand-up meeting',
         todo: 1,
         done: 0,
-        position: 5,
+        position: 4,
         description: 'At 10:00',
         date: ''
     },
@@ -35,7 +35,7 @@ const todayActions = [
         title: '[TEST] Call mechanic',
         todo: 1,
         done: 0,
-        position: 7,
+        position: 3,
         description: '',
         date: ''
     },
@@ -43,7 +43,7 @@ const todayActions = [
         title: '[TEST] Prepare Continuous Delivery presentation',
         todo: 4,
         done: 1,
-        position: 4,
+        position: 2,
         description: '#10 slides',
         date: '2017-01-31'
     },
@@ -51,7 +51,7 @@ const todayActions = [
         title: '[TEST] Read \"Scaling Lean & Agile Development\"',
         todo: 10,
         done: 1,
-        position: 2,
+        position: 1,
         description: 'Description of action',
         date: '2017-02-15'
     },

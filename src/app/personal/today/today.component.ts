@@ -33,6 +33,8 @@ export class TodayComponent implements OnInit {
 
   sprintActions: Array<Action>;
   todayActions: Array<Action> = [];
+  sprintPrefix: string = 'sp';
+  todayPrefix: string = 'td';
 
   constructor(private actionService: ActionService) { }
 

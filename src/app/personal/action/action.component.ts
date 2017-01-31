@@ -39,6 +39,8 @@ export class ActionComponent implements OnInit {
   action: Action;
   @Input()
   arrayActions: Array<Action>;
+  @Input()
+  backlogPrefix: string;
   @ViewChild('deleteModal')
   public deleteModal: ModalDirective;
   edit: boolean = false;
@@ -104,6 +106,10 @@ export class ActionComponent implements OnInit {
 
   unsetEdit(): void {
     this.edit = false;
+  }
+
+  getId(): string {
+    return this.action.position.toString();
   }
 
   displayDate(): string {

@@ -27,7 +27,7 @@ const sprintActions = [
         title: '[TEST] Take children to school',
         todo: 1,
         done: 0,
-        position: 6,
+        position: 5,
         description: 'Before 08:35',
         date: ''
     },
@@ -35,7 +35,7 @@ const sprintActions = [
         title: '[TEST] Call the bank',
         todo: 1,
         done: 0,
-        position: 8,
+        position: 4,
         description: '',
         date: ''
     },
@@ -51,7 +51,7 @@ const sprintActions = [
         title: '[TEST] Prepare alpha project budget',
         todo: 3,
         done: 1,
-        position: 9,
+        position: 2,
         description: '',
         date: '2017-01-31'
     },
