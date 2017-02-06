@@ -6,8 +6,8 @@
       </button>
     </h3>
     <ul class="list-group list-group-sortable-connected">
-      <li *ngFor="let action of sprintActions" class="list-group-item">
-        <app-personal-action [action]="action" [arrayActions]="sprintActions" [backlogPrefix]="sprintPrefix"></app-personal-action>
+      <li *ngFor="let sprintAction of sprintActions" class="list-group-item">
+        <app-personal-action [action]="sprintAction" [arrayActions]="sprintActions" [backlogPrefix]="sprintPrefix"></app-personal-action>
       </li>
     </ul>
   </div>
@@ -20,7 +20,7 @@
       <div class="panel-body" dnd-sortable-container [dropZones]="['actions-zone']" [sortableData]="todayActions">
         <ul class="list-group">
           <li *ngFor="let todayAction of todayActions; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">
-             <app-personal-action [action]="todayAction" [arrayActions]="sprintActions" [backlogPrefix]="todayPrefix"></app-personal-action>
+             <app-personal-action [action]="todayAction" [arrayActions]="todayActions" [backlogPrefix]="todayPrefix"></app-personal-action>
           </li>
         </ul>
     </div>

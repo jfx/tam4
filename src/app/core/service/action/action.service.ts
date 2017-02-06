@@ -75,18 +75,4 @@ export class ActionService {
   deleteInSprint(action: Action): void {
     this.sprintBacklog.remove(action.$key);
   }
-
-  private extractData(res: Response) {
-    if (res.status < 200 || res.status >= 300) {
-      throw new Error('Bad response status: ' + res.status);
-    }
-    const body = res.json();
-    return body.data || {};
-  }
-
-  private handleError(error: any) {
-    const errMsg = error.message || 'Server error';
-    console.error(errMsg); // log to console instead
-    return Observable.throw(errMsg);
-  }
 }

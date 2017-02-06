@@ -69,7 +69,7 @@ export class TodayComponent implements OnInit {
 
   add2Sprint(): void {
     const position = this.getNextAvalaiblePosition(this.sprintActions);
-    const action = new Action('', '', 1, 0, position, '', '');
+    const action = new Action('', '', '', 1, 0, position, '', '');
     this.sprintActions.push(action);
     this.sortArrayActions(this.sprintActions);
   }

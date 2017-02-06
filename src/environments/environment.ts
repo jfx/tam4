@@ -6,6 +6,7 @@
 export const environment = {
   production: false,
   mock: true,
+  mockServer: 'http://localhost:3000',
   envName: 'DEV',
   version: '0.3.0-beta',
   apiKey: 'not-used',

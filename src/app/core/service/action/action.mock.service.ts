@@ -17,7 +17,7 @@
  * along with tam4. If not, see <http://www.gnu.org/licenses/>.
  */
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, RequestOptions, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -32,51 +32,66 @@ import { Action } from 'app/personal/shared/action.model';
 
 @Injectable()
 export class ActionMockService {
-  private actionsInMemoryUrl = 'app/actions';  // URL to web api
   private headers = new Headers({ 'Content-Type': 'application/json' });
+  private options = new RequestOptions({ headers: this.headers });
+
+  private sprintActionsUrl = environment.mockServer + '/sprint-actions';
+  private todayActionsUrl = environment.mockServer + '/today-actions';
 
   constructor(private http: Http) { }
 
-  getActions(): Observable<Action[]> {
-    return this.http.get(this.actionsInMemoryUrl)
+  getSprintActions(): Observable<Action[]> {
+    return this.http.get(this.sprintActionsUrl)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  create(action: Action): void {
-    this.http
-      .post(this.actionsInMemoryUrl, JSON.stringify(action), { headers: this.headers })
+  getTodayActions(): Observable<Action[]> {
+    return this.http.get(this.todayActionsUrl)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  update(action: Action): void {
-    const url = `${this.actionsInMemoryUrl}/${action.$key}`;
+  createInSprint(action: Action): void {
     this.http
-      .put(url, JSON.stringify(action), { headers: this.headers })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .post(this.sprintActionsUrl, JSON.stringify(action), this.options)
+      .subscribe(res => this.extractData(res), err => this.handleError(err));
   }
 
-  delete(action: Action): void {
-    const url = `${this.actionsInMemoryUrl}/${action.$key}`;
+  updateInSprint(action: Action): void {
+    const url = `${this.sprintActionsUrl}/${action.id}`;
+
     this.http
-      .delete(url, { headers: this.headers })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .put(url, JSON.stringify(action), this.options)
+      .subscribe(res => this.extractData(res), err => this.handleError(err));
+  }
+
+  deleteInSprint(action: Action): void {
+    const url = `${this.sprintActionsUrl}/${action.id}`;
+
+    this.http
+      .delete(url, this.options)
+      .subscribe(res => this.extractData(res), err => this.handleError(err));
   }
 
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {
       throw new Error('Bad response status: ' + res.status);
     }
-    const body = res.json();
-    return body.data || {};
+    return res.json() || {};
   }
 
-  private handleError(error: any) {
-    const errMsg = error.message || 'Server error';
-    console.error(errMsg); // log to console instead
+  private handleError(error: Response | any) {
+    // In a real world app, we might use a remote logging infrastructure
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
     return Observable.throw(errMsg);
   }
 }

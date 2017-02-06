@@ -20,7 +20,15 @@ Date should be
     Should Be Equal    ${attr-value}    ${value}
 
 Load data in DB
-    ${rc} =    Run And Return Rc    ${CURDIR}/../../../data/loadDB.sh
+    Run Keyword If    '${ENV}' == 'DEV'    Load data in DEV DB
+    Run Keyword If    '${ENV}' == 'TEST'    Load data in TEST DB
+
+Load data in DEV DB
+    ${rc} =    Run And Return Rc    ${CURDIR}/../../../data/loadDevDB.sh
+    Should Be Equal As Integers    ${rc}    0
+
+Load data in TEST DB
+    ${rc} =    Run And Return Rc    ${CURDIR}/../../../data/loadTestDB.sh
     Should Be Equal As Integers    ${rc}    0
 
 Teardown

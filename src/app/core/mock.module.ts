@@ -19,11 +19,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-// Necessary for in-memory-web-api
+// Necessary for ActionMockService
 import { HttpModule } from '@angular/http';
-
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './service/action/in-memory-data.service';
 
 import { ActionService } from './service/action/action.service';
 import { ActionMockService } from './service/action/action.mock.service';
@@ -32,7 +29,6 @@ import { ActionMockService } from './service/action/action.mock.service';
   imports: [
     CommonModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   declarations: [
   ],

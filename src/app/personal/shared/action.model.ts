@@ -20,6 +20,7 @@ export class Action {
 
   constructor(
     public $key: string,
+    public id: string,
     public title: string,
     public todo: number,
     public done: number,  // default value 0
@@ -30,6 +31,7 @@ export class Action {
   clone(): Action {
     return new Action(
       this.$key,
+      this.id,
       this.title,
       this.todo,
       this.done,
