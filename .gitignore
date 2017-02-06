@@ -11,6 +11,9 @@
 src/environments/environment.test.ts
 src/environments/environment.prod.ts
 
+# test
+tests/data/devDB.json
+
 # IDEs and editors
 /.idea
 .project

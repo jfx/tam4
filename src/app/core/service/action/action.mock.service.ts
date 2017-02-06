@@ -34,7 +34,6 @@ import { Action } from 'app/personal/shared/action.model';
 export class ActionMockService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private options = new RequestOptions({ headers: this.headers });
-
   private sprintActionsUrl = environment.mockServer + '/sprint-actions';
   private todayActionsUrl = environment.mockServer + '/today-actions';
 
@@ -55,7 +54,7 @@ export class ActionMockService {
   createInSprint(action: Action): void {
     this.http
       .post(this.sprintActionsUrl, JSON.stringify(action), this.options)
-      .subscribe(res => this.extractData(res), err => this.handleError(err));
+      .subscribe(res => { action.id = this.extractData(res).id; }, err => this.handleError(err));
   }
 
   updateInSprint(action: Action): void {

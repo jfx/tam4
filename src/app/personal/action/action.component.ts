@@ -76,7 +76,7 @@ export class ActionComponent implements OnInit {
   close(): void {
     // Add -> remove it from Array
     if (this.isAdd()) {
-      const index = this.arrayActions.findIndex(action => ((this.action.$key === '') && (this.action.id === '')));
+      const index = this.arrayActions.findIndex(action => ((action.$key === '') && (action.id === '')));
       this.arrayActions.splice(index, 1);
     } else {
       this.action.$key = this.actionBackup.$key;
@@ -146,6 +146,10 @@ export class ActionComponent implements OnInit {
 
   delete(): void {
     this.actionService.deleteInSprint(this.action);
+    const index = this.arrayActions.findIndex(action => ((action.$key === this.action.$key) && (action.id === this.action.id)));
+    if (index != null) {
+      this.arrayActions.splice(index, 1);
+    }
     this.deleteModal.hide();
   }
 
