@@ -8,7 +8,7 @@ export const environment = {
   mock: true,
   mockServer: 'http://localhost:3000',
   envName: 'DEV',
-  version: '0.3.0-beta',
+  version: '0.3.0',
   apiKey: 'not-used',
   authDomain: 'not-used',
   databaseURL: 'https://not-used.firebaseio.com',

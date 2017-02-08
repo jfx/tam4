@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   mock: false,
   envName: 'PROD',
-  version: '0.3.0-beta',
+  version: '0.3.0',
   apiKey: '<your-key>',
   authDomain: '<your-project-authdomain>',
   databaseURL: '<your-database-URL>',
