@@ -52,24 +52,44 @@ export class ActionMockService {
   }
 
   createInSprint(action: Action): void {
+    this.create(action, this.sprintActionsUrl);
+  }
+
+  createInToday(action: Action): void {
+    this.create(action, this.todayActionsUrl);
+  }
+
+  private create(action: Action, url: any) {
     this.http
-      .post(this.sprintActionsUrl, JSON.stringify(action), this.options)
+      .post(url, JSON.stringify(action), this.options)
       .subscribe(res => { action.id = this.extractData(res).id; }, err => this.handleError(err));
   }
 
   updateInSprint(action: Action): void {
-    const url = `${this.sprintActionsUrl}/${action.id}`;
+    this.update(action, this.sprintActionsUrl);
+  }
 
+  updateInToday(action: Action): void {
+    this.update(action, this.todayActionsUrl);
+  }
+
+  private update(action: Action, url: any): void {
     this.http
-      .put(url, JSON.stringify(action), this.options)
+      .put(`${url}/${action.id}`, JSON.stringify(action), this.options)
       .subscribe(res => this.extractData(res), err => this.handleError(err));
   }
 
   deleteInSprint(action: Action): void {
-    const url = `${this.sprintActionsUrl}/${action.id}`;
+    this.delete(action, this.sprintActionsUrl);
+  }
 
+  deleteInToday(action: Action): void {
+    this.delete(action, this.todayActionsUrl);
+  }
+
+  private delete(action: Action, url: any): void {
     this.http
-      .delete(url, this.options)
+      .delete(`${url}/${action.id}`, this.options)
       .subscribe(res => this.extractData(res), err => this.handleError(err));
   }
 

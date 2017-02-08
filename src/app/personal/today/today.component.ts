@@ -68,13 +68,21 @@ export class TodayComponent implements OnInit {
   }
 
   add2Sprint(): void {
-    const position = this.getNextAvalaiblePosition(this.sprintActions);
-    const action = new Action('', '', '', 1, 0, position, '', '');
-    this.sprintActions.push(action);
-    this.sortArrayActions(this.sprintActions);
+    this.add(this.sprintActions);
   }
 
-  sortArrayActions(arrayActions: Array<Action>): void {
+  add2Today(): void {
+    this.add(this.todayActions);
+  }
+
+  private add(arrayAction: Array<Action>): void {
+    const position = this.getNextAvalaiblePosition(arrayAction);
+    const action = new Action('', '', '', 1, 0, position, '', '');
+    arrayAction.push(action);
+    this.sortArrayActions(arrayAction);
+  }
+
+  private sortArrayActions(arrayActions: Array<Action>): void {
     arrayActions.sort((a, b): number => {
       if (a.position < b.position) { return 1; }
       if (a.position > b.position) { return -1; }
@@ -82,7 +90,7 @@ export class TodayComponent implements OnInit {
     });
   }
 
-  getNextAvalaiblePosition(arrayActions: Array<Action>): number {
+  private getNextAvalaiblePosition(arrayActions: Array<Action>): number {
     if (arrayActions.length === 0) {
       return 1;
     } else {

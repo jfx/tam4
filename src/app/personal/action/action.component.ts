@@ -66,9 +66,23 @@ export class ActionComponent implements OnInit {
 
   onSubmit(): void {
     if (this.isAdd()) {
-      this.actionService.createInSprint(this.action);
+      switch (this.backlogPrefix) {
+        case 'sp':
+          this.actionService.createInSprint(this.action);
+          break;
+        case 'td':
+          this.actionService.createInToday(this.action);
+          break;
+      }
     } else {
-      this.actionService.updateInSprint(this.action);
+      switch (this.backlogPrefix) {
+        case 'sp':
+          this.actionService.updateInSprint(this.action);
+          break;
+        case 'td':
+          this.actionService.updateInToday(this.action);
+          break;
+      }
     }
     this.unsetEdit();
   }
@@ -145,7 +159,14 @@ export class ActionComponent implements OnInit {
   }
 
   delete(): void {
-    this.actionService.deleteInSprint(this.action);
+    switch (this.backlogPrefix) {
+      case 'sp':
+        this.actionService.deleteInSprint(this.action);
+        break;
+      case 'td':
+        this.actionService.deleteInToday(this.action);
+        break;
+    }
     const index = this.arrayActions.findIndex(action => ((action.$key === this.action.$key) && (action.id === this.action.id)));
     if (index != null) {
       this.arrayActions.splice(index, 1);

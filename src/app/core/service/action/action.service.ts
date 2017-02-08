@@ -46,7 +46,15 @@ export class ActionService {
   }
 
   createInSprint(action: Action): void {
-    this.sprintBacklog.push(
+    this.create(action, this.sprintBacklog);
+  }
+
+  createInToday(action: Action): void {
+    this.create(action, this.todayBacklog);
+  }
+
+  private create(action: Action, backlog: any): void {
+    backlog.push(
       {
         title: action.title,
         todo: action.todo,
@@ -59,7 +67,15 @@ export class ActionService {
   }
 
   updateInSprint(action: Action): void {
-    this.sprintBacklog.update(
+    this.update(action, this.sprintBacklog);
+  }
+
+  updateInToday(action: Action): void {
+    this.update(action, this.todayBacklog);
+  }
+
+  private update(action: Action, backlog: any): void {
+    backlog.update(
       action.$key,
       {
         title: action.title,
@@ -73,6 +89,14 @@ export class ActionService {
   }
 
   deleteInSprint(action: Action): void {
-    this.sprintBacklog.remove(action.$key);
+    this.delete(action, this.sprintBacklog);
+  }
+
+  deleteInToday(action: Action): void {
+    this.delete(action, this.todayBacklog);
+  }
+
+  private delete(action: Action, backlog: any): void {
+    backlog.remove(action.$key);
   }
 }

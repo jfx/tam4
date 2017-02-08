@@ -1,5 +1,5 @@
 *** Variables ***
-&{ACTION1}        title=Learn "Introduction to TypeScript" course with very very long title and some other things    todo=6    done=0    position=1    description=    date=31/12/2016
+&{ACTION1}        title=Learn "Introduction to TypeScript" course with very very long title and some other things    todo=6    done=0    position=1    description=    date=28/02/2017
 &{ACTION2}        title=Write Docker best practices    todo=5    done=1    position=3    description=    date=31/01/2017
 &{ACTION2MOD}     title=Write Docker best practices Mod    todo=7    done=2    position=3    description=Modified description of action    date=03/02/2017
 &{ACTION3ADD}     title=Title of added action    todo=5    done=3    position=6    description=Description of added action    date=31/01/2017
