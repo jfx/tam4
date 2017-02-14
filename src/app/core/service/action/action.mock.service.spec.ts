@@ -4,12 +4,13 @@ import { HttpModule, Http } from '@angular/http';
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { ActionMockService } from './action.mock.service';
+import { AlertService } from '../alert/alert.service';
 
 describe('Service: ActionMockService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
-      providers: [ActionMockService]
+      providers: [ActionMockService, AlertService]
     });
   });
 
@@ -23,9 +24,9 @@ describe('Service: ActionMockService', () => {
     })
   );
 
-  it('can instantiate service with "new"', inject([Http], (http: Http) => {
+  it('can instantiate service with "new"', inject([Http, AlertService], (http: Http, alertService: AlertService) => {
     expect(http).not.toBeNull('http should be provided');
-    const service = new ActionMockService(http);
+    const service = new ActionMockService(http, alertService);
     expect(service instanceof ActionMockService).toBe(true, 'new service should be ok');
   }));
 
@@ -35,9 +36,9 @@ describe('Service: ActionMockService', () => {
     })
   );
 
-  it('should have expected actions', inject([Http], (http: Http) => {
+  it('should have expected actions', inject([Http], (http: Http, alertService: AlertService) => {
     expect(http).not.toBeNull('http should be provided');
-    const service = new ActionMockService(http);
+    const service = new ActionMockService(http, alertService);
 
     service.getSprintActions()
       .do(actions => {

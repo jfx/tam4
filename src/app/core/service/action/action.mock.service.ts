@@ -28,7 +28,10 @@ import 'rxjs/add/operator/map';
 
 import { environment } from 'app/../environments/environment';
 
+import { AlertService } from '../alert/alert.service';
+
 import { Action } from 'app/personal/shared/action.model';
+import { Alert } from '../../shared/alert.model';
 
 @Injectable()
 export class ActionMockService {
@@ -37,7 +40,7 @@ export class ActionMockService {
   private sprintActionsUrl = environment.mockServer + '/sprint-actions';
   private todayActionsUrl = environment.mockServer + '/today-actions';
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private alertService: AlertService) { }
 
   getSprintActions(): Observable<Action[]> {
     return this.http.get(this.sprintActionsUrl)
@@ -95,6 +98,8 @@ export class ActionMockService {
 
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {
+      const alert = new Alert();
+      this.alertService.add(alert);
       throw new Error('Bad response status: ' + res.status);
     }
     return res.json() || {};
@@ -110,6 +115,8 @@ export class ActionMockService {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
+    const alert = new Alert();
+    this.alertService.add(alert);
     console.error(errMsg);
     return Observable.throw(errMsg);
   }

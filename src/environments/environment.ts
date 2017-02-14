@@ -12,5 +12,6 @@ export const environment = {
   apiKey: 'not-used',
   authDomain: 'not-used',
   databaseURL: 'https://not-used.firebaseio.com',
-  storageBucket: 'not-used'
+  storageBucket: 'not-used',
+  alertTimeout: 20000
 };

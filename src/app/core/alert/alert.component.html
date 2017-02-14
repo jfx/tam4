@@ -1,0 +1,7 @@
+<div class="alert-panel">
+  <div *ngFor="let alert of alerts">
+    <alert [type]="alert.type" dismissOnTimeout="{{ timeout }}" dismissible="true">
+      <strong>{{ alert.strongMessage }}</strong> {{ alert.message }}
+    </alert>
+  </div>
+</div>

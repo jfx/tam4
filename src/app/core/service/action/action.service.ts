@@ -23,8 +23,6 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 import { Observable } from 'rxjs/Observable';
 
-import { environment } from 'app/../environments/environment';
-
 import { Action } from 'app/personal/shared/action.model';
 
 @Injectable()

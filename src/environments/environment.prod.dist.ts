@@ -6,5 +6,6 @@ export const environment = {
   apiKey: '<your-key>',
   authDomain: '<your-project-authdomain>',
   databaseURL: '<your-database-URL>',
-  storageBucket: '<your-storage-bucket>'
+  storageBucket: '<your-storage-bucket>',
+  alertTimeout: 20000
 };

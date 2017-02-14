@@ -19,11 +19,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 
+import { AngularFireModule } from 'angularfire2';
+import { AlertModule } from 'ng2-bootstrap/alert';
+
 import { environment } from 'app/../environments/environment';
 
-import { AngularFireModule } from 'angularfire2';
-
 import { ActionService } from './service/action/action.service';
+import { AlertService } from './service/alert/alert.service';
+import { AlertComponent } from './alert/alert.component';
 
 export const firebaseConfig = {
   apiKey: environment.apiKey,
@@ -36,12 +39,13 @@ export const firebaseConfig = {
   imports: [
     CommonModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    AlertModule.forRoot(),
   ],
   declarations: [
-  ],
+    AlertComponent],
   exports: [
-  ],
-  providers: [ActionService]
+    AlertComponent],
+  providers: [ActionService, AlertService]
 })
 export class CoreModule {
 
