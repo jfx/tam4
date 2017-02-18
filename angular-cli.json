@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.26",
+    "version": "1.0.0-beta.32.3",
     "name": "tam4"
   },
   "apps": [{
@@ -17,10 +17,10 @@
     "prefix": "app",
     "mobile": false,
     "styles": [
-      "assets/css/font-awesome.css",
       "assets/css/bootstrap.css",
+      "assets/css/font-awesome.css",
+      "../node_modules/dragula/dist/dragula.min.css",
       "assets/scss/main.scss",
-      "../node_modules/ng2-dnd/style.css",
       "styles.css"
     ],
     "scripts": [
