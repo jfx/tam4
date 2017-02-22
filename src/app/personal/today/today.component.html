@@ -5,8 +5,8 @@
         <i class="fa fa-plus-circle"></i>
       </button>
     </h3>
-    <ul class="list-group">
-      <li *ngFor="let sprintAction of sprintActions" class="list-group-item">
+    <ul id ="{{ sprintPrefix }}" class="list-group" [dragula]='"today-bag"' [dragulaModel]='sprintActions'>
+      <li *ngFor="let sprintAction of sprintActions" [id]="sprintAction.id" class="list-group-item">
         <app-personal-action [action]="sprintAction" [arrayActions]="sprintActions" [backlogPrefix]="sprintPrefix"></app-personal-action>
       </li>
     </ul>
@@ -18,8 +18,8 @@
       </button>
     </h3>
       <div class="panel-body">
-        <ul class="list-group">
-          <li *ngFor="let todayAction of todayActions" class="list-group-item">
+        <ul id ="{{ todayPrefix }}" class="list-group" [dragula]='"today-bag"' [dragulaModel]='todayActions'>
+          <li *ngFor="let todayAction of todayActions" [id]="todayAction.id" class="list-group-item">
              <app-personal-action [action]="todayAction" [arrayActions]="todayActions" [backlogPrefix]="todayPrefix"></app-personal-action>
           </li>
         </ul>

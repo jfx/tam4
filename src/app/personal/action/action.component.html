@@ -4,7 +4,11 @@
     <i onClick="window.alert('Action chart !');" class="fa fa-area-chart"></i>
     <i id="{{ backlogPrefix }}_i_action_edit_{{ getId() }}" (click)="setEdit()" class="fa fa-edit"></i>
     <i id="{{ backlogPrefix }}_i_action_del_{{ getId() }}" (click)="showDeleteModal()" class="fa fa-times"></i>&nbsp;
-    <a id="{{ backlogPrefix }}_l_action_edit_{{ getId() }}" href="javascript:void(0)" (click)="setEdit()" placement="bottom" tooltip="{{ action.description }}">{{ action.title }} <span id="{{ backlogPrefix }}_p_action_todo_{{ getId() }}" class="tag tag-pill tag-default">{{ action.todo }}</span></a>
+    <a id="{{ backlogPrefix }}_l_action_edit_{{ getId() }}" href="javascript:void(0)" (click)="setEdit()" placement="bottom"
+      tooltip="{{ action.description }}">{{ action.title }} <span id="{{ backlogPrefix }}_p_action_todo_{{ getId() }}" class="tag tag-pill tag-default">{{ action.todo }}</span></a>
+    <div class="float-xs-right">
+      <i id="{{ backlogPrefix }}_i_action_more_{{ getId() }}" class="fa fa-ellipsis-v"></i>
+    </div>
   </div>
   <div class="row">
     <span class="tag tag-danger">Urgent</span>
@@ -21,29 +25,32 @@
   <form (ngSubmit)="onSubmit()" #actionForm="ngForm">
     <div class="form-group">
       <label class="sr-only" for="{{ backlogPrefix }}_edit_title_{{ getId() }}">Title</label>
-      <input type="text" class="form-control" id="{{ backlogPrefix }}_edit_title_{{ getId() }}" required [(ngModel)]="action.title" name="title"
-        placeholder="Title">
+      <input type="text" class="form-control" id="{{ backlogPrefix }}_edit_title_{{ getId() }}" required [(ngModel)]="action.title"
+        name="title" placeholder="Title">
     </div>
     <div class="form-group row">
       <label class="col-xs-3 col-form-label">Due date</label>
       <div class="col-xs-4">
-        <my-date-picker id="{{ backlogPrefix }}_edit_date_{{ getId() }}" [selDate]="displayDate()" [options]="myDatePickerNormalOptions" (dateChanged)="onDateChanged($event)"></my-date-picker>
+        <my-date-picker id="{{ backlogPrefix }}_edit_date_{{ getId() }}" [selDate]="displayDate()" [options]="myDatePickerNormalOptions"
+          (dateChanged)="onDateChanged($event)"></my-date-picker>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-xs-3 col-form-label" for="{{ backlogPrefix }}_edit_todo_{{ getId() }}">Todo</label>
       <div class="col-xs-3">
-        <input type="number" class="form-control" id="{{ backlogPrefix }}_edit_todo_{{ getId() }}" required [(ngModel)]="action.todo" name="todo">
+        <input type="number" class="form-control" id="{{ backlogPrefix }}_edit_todo_{{ getId() }}" required [(ngModel)]="action.todo"
+          name="todo">
       </div>
       <label class="col-xs-3 col-form-label" for="{{ backlogPrefix }}_edit_done_{{ getId() }}">Done</label>
       <div class="col-xs-3">
-        <input type="number" class="form-control" id="{{ backlogPrefix }}_edit_done_{{ getId() }}" required [(ngModel)]="action.done" name="done">
+        <input type="number" class="form-control" id="{{ backlogPrefix }}_edit_done_{{ getId() }}" required [(ngModel)]="action.done"
+          name="done">
       </div>
     </div>
     <div class="form-group">
       <label class="sr-only" for="{{ backlogPrefix }}_edit_desc_{{ getId() }}">Description</label>
-      <textarea type="text" class="form-control" id="{{ backlogPrefix }}_edit_desc_{{ getId() }}" [(ngModel)]="action.description" name="desc"
-        rows="4" placeholder="Description"></textarea>
+      <textarea type="text" class="form-control" id="{{ backlogPrefix }}_edit_desc_{{ getId() }}" [(ngModel)]="action.description"
+        name="desc" rows="4" placeholder="Description"></textarea>
     </div>
     <button id="{{ backlogPrefix }}_b_save_{{ getId() }}" type="submit" class="btn btn-success" [disabled]="!actionForm.form.valid">Save</button>
     <button id="{{ backlogPrefix }}_b_close_{{ getId() }}" type="button" class="btn btn-secondary" (click)="close()">Close</button>

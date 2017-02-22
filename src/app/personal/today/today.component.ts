@@ -21,8 +21,13 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
+import { DragulaService } from 'ng2-dragula';
+
 import { Action } from '../shared/action.model';
 import { ActionService } from 'app/core/service/action/action.service';
+import { Alert } from 'app/core/shared/alert.model';
+import { AlertService } from 'app/core/service/alert/alert.service';
+import { PositionArray } from 'app/core/util/position-array';
 
 @Component({
   selector: 'app-personal-today',
@@ -31,12 +36,25 @@ import { ActionService } from 'app/core/service/action/action.service';
 })
 export class TodayComponent implements OnInit {
 
-  sprintActions: Array<Action>;
+  sprintActions: Array<Action> = [];
   todayActions: Array<Action> = [];
   sprintPrefix: string = 'sp';
   todayPrefix: string = 'td';
 
-  constructor(private actionService: ActionService) { }
+  constructor(
+    private actionService: ActionService,
+    private dragulaService: DragulaService,
+    private alertService: AlertService
+  ) {
+
+    dragulaService.dropModel.subscribe((value: any) => {
+      this.onDropModel(value.slice(1));
+    });
+
+    dragulaService.removeModel.subscribe((value) => {
+      this.onRemoveModel(value.slice(1));
+    });
+  }
 
   ngOnInit(): void {
     this.getSprintActions();
@@ -47,11 +65,13 @@ export class TodayComponent implements OnInit {
     this.actionService.getSprintActions()
       .map(actions => {
         this.sprintActions = actions;
-        this.sortArrayActions(this.sprintActions);
+        PositionArray.sort(this.sprintActions);
       })
       .toPromise()
       .catch(err => {
         console.error(err);
+        const alert = new Alert();
+        this.alertService.add(alert);
       });
   }
 
@@ -59,12 +79,51 @@ export class TodayComponent implements OnInit {
     this.actionService.getTodayActions()
       .map(actions => {
         this.todayActions = actions;
-        this.sortArrayActions(this.todayActions);
+        PositionArray.sort(this.todayActions);
       })
       .toPromise()
       .catch(err => {
         console.error(err);
+        const alert = new Alert();
+        this.alertService.add(alert);
       });
+  }
+
+  private onDropModel(args: any): void {
+    const [el, target, source] = args;
+    const actionId = el.attributes.id.nodeValue;
+    const sourceId = source.attributes.id.nodeValue;
+    const targetId = target.attributes.id.nodeValue;
+
+    if (targetId === this.sprintPrefix) {
+      const index = this.sprintActions.findIndex(action => (action.id === actionId));
+      this.updatePosition(this.sprintActions, index);
+      PositionArray.sort(this.sprintActions);
+
+      if (targetId === sourceId) {
+        this.actionService.updateInSprint(this.sprintActions[index]);
+      } else {
+        this.actionService.createInSprint(this.sprintActions[index]);
+        this.actionService.deleteInToday(this.sprintActions[index]);
+      }
+    } else if (targetId === this.todayPrefix) {
+      const index = this.todayActions.findIndex(action => (action.id === actionId));
+      this.updatePosition(this.todayActions, index);
+      PositionArray.sort(this.todayActions);
+
+      if (targetId === sourceId) {
+        this.actionService.updateInToday(this.todayActions[index]);
+      } else {
+        this.actionService.createInToday(this.todayActions[index]);
+        this.actionService.deleteInSprint(this.todayActions[index]);
+      }
+    }
+  }
+
+  private onRemoveModel(args: any): void {
+    console.log('Error onRemoveModel !');
+    const alert = new Alert();
+    this.alertService.add(alert);
   }
 
   add2Sprint(): void {
@@ -75,32 +134,21 @@ export class TodayComponent implements OnInit {
     this.add(this.todayActions);
   }
 
-  private add(arrayAction: Array<Action>): void {
-    const position = this.getNextAvalaiblePosition(arrayAction);
+  private add(arrayActions: Array<Action>): void {
+    const position = PositionArray.getNextPosition(arrayActions);
     const action = new Action('', '', '', 1, 0, position, '', '');
-    arrayAction.push(action);
-    this.sortArrayActions(arrayAction);
+    arrayActions.push(action);
+    PositionArray.sort(arrayActions);
   }
 
-  private sortArrayActions(arrayActions: Array<Action>): void {
-    arrayActions.sort((a, b): number => {
-      if (a.position < b.position) { return 1; }
-      if (a.position > b.position) { return -1; }
-      return 0;
-    });
-  }
+  private updatePosition(arrayActions: Array<Action>, index: number): void {
+    if (index === 0) {
+      arrayActions[index].position = PositionArray.getNextPosition(arrayActions);
+    } else if (index === (arrayActions.length - 1)) {
+      arrayActions[index].position = PositionArray.getFirstPosition(arrayActions);
 
-  private getNextAvalaiblePosition(arrayActions: Array<Action>): number {
-    if (arrayActions.length === 0) {
-      return 1;
     } else {
-      let maxPosition = -100000000;
-      for (let i = 0; i < arrayActions.length; i++) {
-        if (arrayActions[i].position > maxPosition) {
-          maxPosition = arrayActions[i].position;
-        }
-      }
-      return Math.ceil(maxPosition + 1);
+      arrayActions[index].position = PositionArray.getPositionAt(arrayActions, index);
     }
   }
 }

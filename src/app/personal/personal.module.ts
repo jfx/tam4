@@ -18,6 +18,7 @@
  */
 import { NgModule } from '@angular/core';
 
+import { DragulaModule } from 'ng2-dragula';
 import { ModalModule } from 'ng2-bootstrap/modal';
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
 
@@ -31,6 +32,7 @@ import { TodayComponent } from './today/today.component';
 
 @NgModule({
   imports: [
+    DragulaModule,
     MyDatePickerModule,
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
