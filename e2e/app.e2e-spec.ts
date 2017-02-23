@@ -1,14 +1,14 @@
-import { Tam4Page } from './app.po';
+import { Tam4App } from './app.po';
 
 describe('tam4 App', function() {
-  let page: Tam4Page;
+  let page: Tam4App;
 
   beforeEach(() => {
-    page = new Tam4Page();
+    page = new Tam4App();
   });
 
-  it('should display message saying app works', () => {
+  it('should have a title', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Hello !');
+    expect(page.getWindowTitle()).toEqual('Tam4');
   });
 });

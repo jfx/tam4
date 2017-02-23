@@ -1,11 +1,11 @@
 import { browser, element, by } from 'protractor';
 
-export class Tam4Page {
+export class Tam4App {
   navigateTo() {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getWindowTitle() {
+    return browser.getTitle();
   }
 }

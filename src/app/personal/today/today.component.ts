@@ -91,7 +91,7 @@ export class TodayComponent implements OnInit {
 
   private onDropModel(args: any): void {
     const [el, target, source] = args;
-    const actionId = el.attributes.id.nodeValue;
+    const actionId = (el.attributes.id.nodeValue).substr(3);
     const sourceId = source.attributes.id.nodeValue;
     const targetId = target.attributes.id.nodeValue;
 
