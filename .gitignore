@@ -21,6 +21,7 @@ tests/data/devDB.json
 .c9/
 *.launch
 .settings/
+*.sublime-workspace
 
 # IDE - VSCode
 .vscode/*
