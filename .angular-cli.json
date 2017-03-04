@@ -32,7 +32,8 @@
     "environmentSource": "environments/environment.ts",
     "environments": {
       "dev": "environments/environment.ts",
-      "test": "environments/environment.test.ts",
+      "test-local": "environments/environment.test-local.ts",
+      "test-remote": "environments/environment.test-remote.ts",
       "prod": "environments/environment.prod.ts"
     }
   }],

@@ -18,13 +18,13 @@
  */
 import * as firebase from 'firebase';
 
-import { environment } from '../../src/environments/environment.test';
+import { environment } from '../../src/environments/environment.test-remote';
 
 console.log('Start to load DB - Env : ' + environment.envName);
 
 const todayActions = [
     {
-        title: '[TEST] Stand-up meeting',
+        title: '[REMOTE] Stand-up meeting',
         todo: 1,
         done: 0,
         position: 4,
@@ -32,7 +32,7 @@ const todayActions = [
         date: ''
     },
     {
-        title: '[TEST] Call mechanic',
+        title: '[REMOTE] Call mechanic',
         todo: 1,
         done: 0,
         position: 3,
@@ -40,7 +40,7 @@ const todayActions = [
         date: ''
     },
     {
-        title: '[TEST] Prepare Continuous Delivery presentation',
+        title: '[REMOTE] Prepare Continuous Delivery presentation',
         todo: 4,
         done: 1,
         position: 2,
@@ -48,7 +48,7 @@ const todayActions = [
         date: '2017-01-31'
     },
     {
-        title: '[TEST] Read \"Scaling Lean & Agile Development\"',
+        title: '[REMOTE] Read \"Scaling Lean & Agile Development\"',
         todo: 10,
         done: 1,
         position: 1,

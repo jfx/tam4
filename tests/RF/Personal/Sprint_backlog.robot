@@ -6,6 +6,7 @@ Resource          Function/sprint_backlog.txt
 
 *** Test Cases ***
 The backlog should display some actions
+    [Setup]
     Given I go to site
     When I go to Personal
     And I wait for actions in Sprint Backlog

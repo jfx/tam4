@@ -1,6 +1,6 @@
 # TAM4
 
-TAM4 for Time Activity Management is a personal productivity app.
+TAM4 for Time Actions Management is a personal productivity app.
 
 tam4 features :
 
@@ -12,17 +12,21 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Running Robot Framework tests
+Prerequisites : 
+- Install ts-node and typescript with npm,
+- Install json-server : npm install -g json-server,
+- Install Robot Framework, Selenium2Library, chromedriver or geckodriver. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+For local tests (json-server) : 
+- In project dir run : ./tests/bin/startLocalTest.sh
+- In project dir run : robot -v ENV:LOCAL tests/RF
+- At end : ./tests/bin/stopLocalTest.sh
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Load tests data
-Prerequisites : Install ts-node and typescript with npm.
-Run 
+For remote tests (firebase) : 
+- In project dir run : ./tests/bin/startRemoteTest.sh
+- In project dir run : robot -v ENV:REMOTE tests/RF
+- At end : ./tests/bin/stopRemoteTest.sh
 
 ## Running unit tests
 

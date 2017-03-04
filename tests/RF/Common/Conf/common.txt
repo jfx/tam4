@@ -1,10 +1,14 @@
 *** Variables ***
-${URL}            http://localhost:4200
-${REMOTE}         False
+${URL}            \    # Set in "I go to site" keyword
+${URL_LOCAL}      http://localhost:4201
+${URL_REMOTE}     http://localhost:4202
+${GRID}           False
 ${BROWSER}        gc
 ${HUB}            http://xyz.xyz.xyz.xyz:4444/wd/hub
 ${DC_VERSION}     ${EMPTY}
 ${DC_OS}          LINUX
 ${SHORT_SLEEP}    2s
 ${TIMEOUT}        10s
-${ENV}            TEST
+${ENV}            LOCAL    # LOCAL or REMOTE
+${DATA_DIR}       ${CURDIR}/../../../data
+${BIN_DIR}        ${CURDIR}/../../../bin

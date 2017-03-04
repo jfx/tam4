@@ -1,12 +1,19 @@
 *** Settings ***
 Library           OperatingSystem
+Library           Process
 Library           Selenium2Library
 Resource          ../Conf/common.txt
 
 *** Keywords ***
+Set URL
+    [Arguments]    ${env_url}
+    Set Global Variable    ${URL}    ${env_url}
+
 I go to site
-    Run Keyword If    ${REMOTE}    Open Browser    ${URL}    ${BROWSER}    remote_url=${HUB}
-    Run Keyword Unless    ${REMOTE}    Open Browser    ${URL}    ${BROWSER}
+    Run Keyword If    '''${ENV}''' == 'REMOTE'    Set URL    ${URL_REMOTE}
+    Run Keyword Unless    '''${ENV}''' == 'REMOTE'    Set URL    ${URL_LOCAL}
+    Run Keyword If    ${GRID}    Open Browser    ${URL}    ${BROWSER}    remote_url=${HUB}
+    Run Keyword Unless    ${GRID}    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
 
 Element should have model value
@@ -19,19 +26,22 @@ Date should be
     ${attr-value}=    Get Element Attribute    xpath=(//my-date-picker[@id='${id}'])[1]//input@ng-reflect-value
     Should Be Equal    ${attr-value}    ${value}
 
-Load data in DB
-    Run Keyword If    '${ENV}' == 'DEV'    Load data in DEV DB
-    Run Keyword If    '${ENV}' == 'TEST'    Load data in TEST DB
+Load DB
+    Run Keyword If    '${ENV}' == 'LOCAL'    Load local DB
+    Run Keyword If    '${ENV}' == 'REMOTE'    Load remote DB
 
-Load data in DEV DB
-    ${rc} =    Run And Return Rc    ${CURDIR}/../../../data/loadDevDB.sh
-    Should Be Equal As Integers    ${rc}    0
+Load local DB
+    Log    -- Load Local DB --
+    Copy File    ${DATA_DIR}/local-ref.json    ${DATA_DIR}/local-test.json
 
-Load data in TEST DB
-    ${rc} =    Run And Return Rc    ${CURDIR}/../../../data/loadTestDB.sh
+Load remote DB
+    Log    -- Load Remote DB --
+    ${rc} =    Run And Return Rc    ${BIN_DIR}/loadRemoteDB.sh
     Should Be Equal As Integers    ${rc}    0
 
 Teardown
+    Log     -- Teardown --
     Close All Browsers
+    Terminate All Processes
     : FOR    ${tag}    IN    @{TEST TAGS}
-    \    Run Keyword If    '${tag}' == 'EDIT'    Load data in DB
+    \    Run Keyword If    '${tag}' == 'EDIT'    Load DB

@@ -18,13 +18,13 @@
  */
 import * as firebase from 'firebase';
 
-import { environment } from '../../src/environments/environment.test';
+import { environment } from '../../src/environments/environment.test-remote';
 
 console.log('Start to load DB - Env : ' + environment.envName);
 
 const sprintActions = [
     {
-        title: '[TEST] Take children to school',
+        title: '[REMOTE] Take children to school',
         todo: 1,
         done: 0,
         position: 5,
@@ -32,7 +32,7 @@ const sprintActions = [
         date: ''
     },
     {
-        title: '[TEST] Call the bank',
+        title: '[REMOTE] Call the bank',
         todo: 1,
         done: 0,
         position: 4,
@@ -40,7 +40,7 @@ const sprintActions = [
         date: ''
     },
     {
-        title: '[TEST] Write Docker best practices',
+        title: '[REMOTE] Write Docker best practices',
         todo: 5,
         done: 1,
         position: 3,
@@ -48,7 +48,7 @@ const sprintActions = [
         date: '2017-01-31'
     },
     {
-        title: '[TEST] Prepare alpha project budget',
+        title: '[REMOTE] Prepare alpha project budget',
         todo: 3,
         done: 1,
         position: 2,
@@ -56,7 +56,7 @@ const sprintActions = [
         date: '2017-01-31'
     },
     {
-        title: '[TEST] Learn \"Introduction to TypeScript\" course with very very long title and some other things',
+        title: '[REMOTE] Learn \"Introduction to TypeScript\" course with very very long title and some other things',
         todo: 6,
         done: 0,
         position: 1,

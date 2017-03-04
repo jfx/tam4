@@ -8,11 +8,17 @@
 /node_modules
 
 # config
-src/environments/environment.test.ts
+src/environments/environment.test-remote.ts
 src/environments/environment.prod.ts
 
 # test
-tests/data/devDB.json
+tests/data/local-dev.json
+tests/data/local-test.json
+
+# Robot Framework
+log.html
+output.xml
+report.html
 
 # IDEs and editors
 /.idea
