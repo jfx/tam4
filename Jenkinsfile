@@ -1,15 +1,18 @@
 // This build is parameterized :
 // - PROJECT_PATH : string parameter
+// - TEST_CHROME_BIN : string parameter
 // - INTERNET : choice parameter true/false
 //Jenkins plugins :
-// - Static Analysis Utilities + Checkstyle plugin
+// - Checkstyle plugin
 // - Robot Framework plugin
 //
 pipeline {
     agent any
     
-//    environment {
-//    }
+    environment {
+        DISPLAY    = ':10'
+        CHROME_BIN = "${TEST_CHROME_BIN}"
+    }
     
     stages {
         
@@ -18,6 +21,8 @@ pipeline {
                 sh 'rm -rf build/'
                 sh 'mkdir build/'
                 sh 'mkdir build/reports/'
+                sh "rm -rf ${PROJECT_PATH}/dist/"
+                sh "mkdir ${PROJECT_PATH}/dist/"
             }
         }
  
@@ -30,6 +35,17 @@ pipeline {
                 }
             }
         }
+
+         stage('Karma Tests') {
+            steps {
+                dir("${PROJECT_PATH}") {
+                    sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
+                    sh "ng test --single-run true --reporters progress,junit"
+                    sh 'sudo pkill Xvfb'
+                    sh "cp dist/reports/karma-junit.xml ${WORKSPACE}/build/reports"
+                }
+            }
+        }
         
         stage('RF Test Local') {
             steps {
@@ -37,7 +53,7 @@ pipeline {
                     sh 'tests/bin/startLocalTest.sh'
                     sh 'tests/bin/checkSite.sh http://localhost:4201'
                     sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
-                    sh "export DISPLAY=:10; robot -d ${WORKSPACE}/build/reports --xunit rf-local-junit.xml -v GRID:False -v BROWSER:gc -v ENV:LOCAL /home/fxs/Dropbox/Src/tam4/tests/RF"
+                    sh "robot -d ${WORKSPACE}/build/reports --xunit rf-local-junit.xml -v GRID:False -v BROWSER:gc -v ENV:LOCAL /home/fxs/Dropbox/Src/tam4/tests/RF"
                     sh 'sudo pkill Xvfb'
                     sh 'tests/bin/stopLocalTest.sh'
                 }
