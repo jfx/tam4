@@ -26,7 +26,8 @@ module.exports = function (config) {
       'text/x-typescript': ['ts','tsx']
     },
     coverageIstanbulReporter: {
-      reports: [ 'html', 'lcovonly' ],
+      reports: [ 'html', 'clover', 'lcovonly', 'text-summary' ],
+      dir: 'dist/reports/coverage',
       fixWebpackSourcePaths: true
     },
     junitReporter: {

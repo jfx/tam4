@@ -4,6 +4,8 @@
 // - INTERNET : choice parameter true/false
 //Jenkins plugins :
 // - Checkstyle plugin
+// - Clover plugin
+// - HTML Publisher plugin
 // - Robot Framework plugin
 //
 pipeline {
@@ -29,6 +31,7 @@ pipeline {
          stage('Check') {
             steps {
                 dir("${PROJECT_PATH}") {
+                    sh 'ng version'
                     sh "ng lint --format checkstyle > ${WORKSPACE}/build/reports/checkstyle-bug.xml || true"
                     // Fix ng lint issue
                     sh "sed '2q;d' ${WORKSPACE}/build/reports/checkstyle-bug.xml > ${WORKSPACE}/build/reports/checkstyle.xml"
@@ -40,9 +43,10 @@ pipeline {
             steps {
                 dir("${PROJECT_PATH}") {
                     sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
-                    sh "ng test --single-run true --reporters progress,junit"
+                    sh "ng test --single-run true --code-coverage true --reporters progress,junit,coverage-istanbul"
                     sh 'sudo pkill Xvfb'
                     sh "cp dist/reports/karma-junit.xml ${WORKSPACE}/build/reports"
+                    sh "cp -r dist/reports/coverage ${WORKSPACE}/build/reports"
                 }
             }
         }
@@ -82,6 +86,22 @@ pipeline {
         always {
             step([$class: 'CheckStylePublisher', pattern: "build/reports/checkstyle.xml", canRunOnFailed: true])
             junit 'build/reports/*-junit.xml'
+            step([
+                $class: 'CloverPublisher',
+                cloverReportDir: 'build/reports/coverage',
+                cloverReportFileName: 'clover.xml',
+                healthyTarget: [methodCoverage: 70, conditionalCoverage: 80, statementCoverage: 80], // optional, default is: method=70, conditional=80, statement=80
+                unhealthyTarget: [methodCoverage: 50, conditionalCoverage: 50, statementCoverage: 50], // optional, default is none
+                failingTarget: [methodCoverage: 0, conditionalCoverage: 0, statementCoverage: 0]     // optional, default is none
+            ])
+            publishHTML (target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: false,
+                keepAll: false,
+                reportDir: 'build/reports/coverage',
+                reportFiles: 'index.html',
+                reportName: "Code Coverage"
+            ])
             step([$class: 'RobotPublisher', disableArchiveOutput: false, logFileName: 'log.html', onlyCritical: true, otherFiles: '*.png', outputFileName: 'output.xml', outputPath: 'build/reports/', passThreshold: 90, reportFileName: 'report.html', unstableThreshold: 100])
         }
     }
