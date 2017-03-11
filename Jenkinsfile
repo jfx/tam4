@@ -46,8 +46,19 @@ pipeline {
                 }
             }
         }
-        
-        stage('RF Test Local') {
+
+         stage('Protractor Tests') {
+            steps {
+                dir("${PROJECT_PATH}") {
+                    sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
+                    sh "ng e2e"
+                    sh 'sudo pkill Xvfb'
+                    sh "cp dist/reports/protractor-junit.xml ${WORKSPACE}/build/reports"
+                }
+            }
+        }
+
+        stage('RF Local Tests') {
             steps {
                 dir("${PROJECT_PATH}") {
                     sh 'tests/bin/startLocalTest.sh'
