@@ -68,9 +68,23 @@ pipeline {
                     sh 'tests/bin/startLocalTest.sh'
                     sh 'tests/bin/checkSite.sh http://localhost:4201'
                     sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
-                    sh "robot -d ${WORKSPACE}/build/reports --xunit rf-local-junit.xml -v GRID:False -v BROWSER:gc -v ENV:LOCAL /home/fxs/Dropbox/Src/tam4/tests/RF"
+                    sh "robot -v GRID:False -v BROWSER:gc -v ENV:LOCAL -d ${WORKSPACE}/build/reports --log none --report none --output local.xml --xunit rf-local-junit.xml /home/fxs/Dropbox/Src/tam4/tests/RF"
                     sh 'sudo pkill Xvfb'
                     sh 'tests/bin/stopLocalTest.sh'
+                }
+            }
+        }
+
+        stage('RF Remote Tests') {
+            steps {
+                dir("${PROJECT_PATH}") {
+                    sh 'tests/bin/loadRemoteDB.sh'
+                    sh 'tests/bin/startRemoteTest.sh'
+                    sh 'tests/bin/checkSite.sh http://localhost:4202'
+                    sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
+                    sh "robot -v GRID:False -v BROWSER:gc -v ENV:REMOTE -d ${WORKSPACE}/build/reports --log none --report none --output remote.xml --xunit rf-remote-junit.xml /home/fxs/Dropbox/Src/tam4/tests/RF"
+                    sh 'sudo pkill Xvfb'
+                    sh 'tests/bin/stopRemoteTest.sh'
                 }
             }
         }
@@ -102,6 +116,7 @@ pipeline {
                 reportFiles: 'index.html',
                 reportName: "Code Coverage"
             ])
+            sh 'rebot --nostatusrc --name "Test Env" --outputdir build/reports --output output.xml build/reports/local.xml build/reports/remote.xml'
             step([$class: 'RobotPublisher', disableArchiveOutput: false, logFileName: 'log.html', onlyCritical: true, otherFiles: '*.png', outputFileName: 'output.xml', outputPath: 'build/reports/', passThreshold: 90, reportFileName: 'report.html', unstableThreshold: 100])
         }
     }
