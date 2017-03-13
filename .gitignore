@@ -14,6 +14,7 @@ src/environments/environment.prod.ts
 # test
 tests/data/local-dev.json
 tests/data/local-test.json
+tests/data/*.pid
 
 # Robot Framework
 log.html
