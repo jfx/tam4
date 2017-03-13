@@ -43,52 +43,26 @@ pipeline {
 
         stage('Karma Tests') {
             steps {
-                dir("${PROJECT_PATH}") {
-                    sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
-                    sh "ng test --single-run true --code-coverage true --reporters progress,junit,coverage-istanbul"
-                    sh 'sudo pkill Xvfb'
-                    sh "cp dist/reports/karma-junit.xml ${WORKSPACE}/build/reports"
-                    sh "cp -r dist/reports/coverage ${WORKSPACE}/build/reports"
-                }
+                runKarmaTests()
             }
         }
 
         stage('Protractor Tests') {
             steps {
-                dir("${PROJECT_PATH}") {
-                    sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
-                    sh "ng e2e"
-                    sh 'sudo pkill Xvfb'
-                    sh "cp dist/reports/protractor-junit.xml ${WORKSPACE}/build/reports"
-                }
+                runProtractorTests()
             }
         }
 
         stage('RF Local Tests') {
             steps {
-                    dir("${PROJECT_PATH}") {
-                        sh 'tests/bin/startLocalTest.sh'
-                        sh 'tests/bin/checkSite.sh http://localhost:4201'
-                        sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
-                        sh "robot -v GRID:False -v BROWSER:gc -v ENV:LOCAL -d ${WORKSPACE}/build/reports --log none --report none --output local.xml --xunit rf-local-junit.xml /home/fxs/Dropbox/Src/tam4/tests/RF"
-                        sh 'sudo pkill Xvfb'
-                        sh 'tests/bin/stopLocalTest.sh'
-                    }
+                runRFLocalTests()
             }
         }
 
         stage('RF Remote Tests') {
             when { environment name: 'INTERNET', value: 'true' }
             steps {
-                dir("${PROJECT_PATH}") {
-                    sh 'tests/bin/loadRemoteDB.sh'
-                    sh 'tests/bin/startRemoteTest.sh'
-                    sh 'tests/bin/checkSite.sh http://localhost:4202'
-                    sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
-                    sh "robot -v GRID:False -v BROWSER:gc -v ENV:REMOTE -d ${WORKSPACE}/build/reports --log none --report none --output remote.xml --xunit rf-remote-junit.xml /home/fxs/Dropbox/Src/tam4/tests/RF"
-                    sh 'sudo pkill Xvfb'
-                    sh 'tests/bin/stopRemoteTest.sh'
-                }
+                runRFRemoteTests()
             }
         }
     }
@@ -139,6 +113,76 @@ def notifySlack(String color, String message) {
     } else {
         echo "No Internet - no slack notifications : ${message}"
     }
+}
+
+def runKarmaTests() {
+    sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
+    try {
+        dir("${PROJECT_PATH}") {
+            sh "ng test --single-run true --code-coverage true --reporters progress,junit,coverage-istanbul"
+        }
+    } catch (err) {
+        echo "Caught: ${err}"
+        currentBuild.result = 'FAILURE'
+    } finally {
+        sh 'sudo pkill Xvfb'
+        dir("${PROJECT_PATH}") {
+            sh "cp dist/reports/karma-junit.xml ${WORKSPACE}/build/reports"
+            sh "cp -r dist/reports/coverage ${WORKSPACE}/build/reports"
+        }
+    }   
+}
+
+def runProtractorTests() {
+    sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
+    try {
+        dir("${PROJECT_PATH}") {
+            sh "ng e2e"
+        }
+    } catch (err) {
+        echo "Caught: ${err}"
+        currentBuild.result = 'FAILURE'
+    } finally {
+        sh 'sudo pkill Xvfb'
+        dir("${PROJECT_PATH}") {
+            sh "cp dist/reports/protractor-junit.xml ${WORKSPACE}/build/reports"
+        }
+    }
+}
+
+def runRFLocalTests() {
+    dir("${PROJECT_PATH}") {
+        sh 'tests/bin/startLocalTest.sh'
+        sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
+        try {
+            sh 'tests/bin/checkSite.sh http://localhost:4201'
+            sh "robot -v GRID:False -v BROWSER:gc -v ENV:LOCAL -d ${WORKSPACE}/build/reports --log none --report none --output local.xml --xunit rf-local-junit.xml /home/fxs/Dropbox/Src/tam4/tests/RF"
+        } catch (err) {
+            echo "Caught: ${err}"
+            currentBuild.result = 'FAILURE'
+        } finally {
+            sh 'sudo pkill Xvfb'
+            sh 'tests/bin/stopLocalTest.sh'
+        }
+    }
+}
+
+def runRFRemoteTests() {
+    dir("${PROJECT_PATH}") {
+        sh 'tests/bin/loadRemoteDB.sh'
+        sh 'tests/bin/startRemoteTest.sh'
+        sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
+        try {
+            sh 'tests/bin/checkSite.sh http://localhost:4202'
+            sh "robot -v GRID:False -v BROWSER:gc -v ENV:REMOTE -d ${WORKSPACE}/build/reports --log none --report none --output remote.xml --xunit rf-remote-junit.xml /home/fxs/Dropbox/Src/tam4/tests/RF"
+        } catch (err) {
+            echo "Caught: ${err}"
+            currentBuild.result = 'FAILURE'
+        } finally {
+            sh 'sudo pkill Xvfb'
+            sh 'tests/bin/stopRemoteTest.sh'
+        }
+    }   
 }
 
 def publishRFReports() {
