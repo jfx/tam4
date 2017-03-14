@@ -1,8 +1,9 @@
 export const environment = {
   production: false,
-  mock: false,
   envName: 'TEST-REMOTE',
-  version: '0.3.0',
+  version: '0.4.0',
+  mock: false,
+  mockServer: '',
   apiKey: '<your-key>',
   authDomain: '<your-project-authdomain>',
   databaseURL: '<your-database-URL>',
