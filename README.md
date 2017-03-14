@@ -1,4 +1,6 @@
 # TAM4
+[![Software License](https://img.shields.io/badge/license-GPL v3-green.svg?style=flat)](LICENSE)
+[![Code Climate](https://codeclimate.com/github/jfx/tam4/badges/gpa.svg)](https://codeclimate.com/github/jfx/tam4)
 
 TAM4 for Time Actions Management is a personal productivity app.
 
