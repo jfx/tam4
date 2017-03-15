@@ -28,7 +28,7 @@ describe('BannerComponent', () => {
 
   it('should render title', async(() => {
     fixture.detectChanges();
-    let compiled = fixture.debugElement.nativeElement;
+    const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h3').textContent).toContain('Dashboard');
   }));
 });

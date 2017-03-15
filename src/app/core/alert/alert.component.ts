@@ -14,7 +14,7 @@ import { Alert } from '../shared/alert.model';
 })
 export class AlertComponent implements OnInit {
   private alerts: Alert[];
-  private timeout: number;
+  public timeout: number;
 
   constructor(private alertService: AlertService) {
     this.timeout = environment.alertTimeout;

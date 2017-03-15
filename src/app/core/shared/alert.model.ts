@@ -18,7 +18,7 @@
  */
 export class Alert {
   public id: number = Date.now();
-  public message: string = 'please reload the page !';
-  public strongMessage: string = 'An error occured:';
-  public type: string = 'danger';
+  public message = 'please reload the page !';
+  public strongMessage = 'An error occured:';
+  public type = 'danger';
 }

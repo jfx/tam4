@@ -43,10 +43,10 @@ export class ActionComponent implements OnInit {
   backlogPrefix: string;
   @ViewChild('deleteModal')
   public deleteModal: ModalDirective;
-  edit: boolean = false;
+  edit = false;
   actionBackup: Action;
 
-  private myDatePickerNormalOptions = {
+  public myDatePickerNormalOptions = {
     dateFormat: 'dd/mm/yyyy',
     selectionTxtFontSize: '14px',
     showDateFormatPlaceholder: true,
