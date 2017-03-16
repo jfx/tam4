@@ -1,6 +1,9 @@
-$font-size-base: 15px !default;
-$font-size-large: ceil(($font-size-base * 1.25)) !default; // ~18px
-$font-size-small: ceil(($font-size-base * 0.85)) !default; // ~12px
+@import 'variables';
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+$font-size-base: 15px;
+$font-size-large: ceil(($font-size-base * 1.25)); // ~18px
+$font-size-small: ceil(($font-size-base * 0.85)); // ~12px
 //
 // Style
 body {
@@ -64,7 +67,6 @@ footer {
   p {
     text-align: center;
     font-size: $font-size-small;
-    // font-size: 12px;
     margin-bottom: .25em;
   }
 }

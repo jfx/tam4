@@ -18,16 +18,11 @@
     "testTsconfig": "tsconfig.spec.json",
     "prefix": "app",
     "styles": [
-      "assets/css/bootstrap.css",
       "../node_modules/font-awesome/css/font-awesome.css",
       "../node_modules/dragula/dist/dragula.min.css",
-      "assets/scss/main.scss",
-      "styles.css"
+      "styles.scss"
     ],
     "scripts": [
-      "assets/js/jquery-3.1.1.min.js",
-      "assets/js/tether.min.js",
-      "assets/js/bootstrap.min.js"
     ],
     "environmentSource": "environments/environment.ts",
     "environments": {

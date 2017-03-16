@@ -8,7 +8,7 @@ ${HUB}            http://xyz.xyz.xyz.xyz:4444/wd/hub
 ${DC_VERSION}     ${EMPTY}
 ${DC_OS}          LINUX
 ${SHORT_SLEEP}    2s
-${TIMEOUT}        10s
+${TIMEOUT}        20s
 ${ENV}            LOCAL    # LOCAL or REMOTE
 ${DATA_DIR}       ${CURDIR}/../../../data
 ${BIN_DIR}        ${CURDIR}/../../../bin
