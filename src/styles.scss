@@ -1,6 +1,10 @@
 @import 'variables';
 @import '../node_modules/bootstrap/scss/bootstrap';
 
+@import '../node_modules/lato-font/scss/public-api';
+$lato-font-path: '../node_modules/lato-font/fonts';
+@include lato-include-font('medium');
+
 $font-size-base: 15px;
 $font-size-large: ceil(($font-size-base * 1.25)); // ~18px
 $font-size-small: ceil(($font-size-base * 0.85)); // ~12px
@@ -8,8 +12,7 @@ $font-size-small: ceil(($font-size-base * 0.85)); // ~12px
 // Style
 body {
   // background-image: url('../images/bg-light.jpg');
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
+  @include lato-font('medium');
   background-size: cover;
   background-repeat: no-repeat;
 }
