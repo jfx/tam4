@@ -67,4 +67,3 @@ I input values in action form
     Input Text    xpath=(//my-date-picker[@id='${ACTION_EDIT.date}_${action.position}'])[1]//input    ${action.date}
     Input Text    ${ACTION_EDIT.todo}_${action.position}    ${action.todo}
     Input Text    ${ACTION_EDIT.done}_${action.position}    ${action.done}
-    Comment    Textarea Value Should Be    ${ACTION_EDIT.desc}_${action.position}    ${action.description}

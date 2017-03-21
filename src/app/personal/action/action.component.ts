@@ -51,7 +51,8 @@ export class ActionComponent implements OnInit {
     selectionTxtFontSize: '14px',
     showDateFormatPlaceholder: true,
     editableMonthAndYear: true,
-    minYear: 2016,
+    minYear: 2017,
+    inputAutoFill: false
   };
 
   constructor(private actionService: ActionService) {

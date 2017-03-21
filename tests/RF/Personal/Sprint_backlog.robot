@@ -44,6 +44,7 @@ Action can be modified with an edit form
     And I wait for actions in Sprint Backlog
     When I click edit link    &{ACTION2}
     And I input values in action form    &{ACTION2MOD}
+    sleep    5s
     And I click save button    &{ACTION2}
     Then following elements of action are displayed    &{ACTION2MOD}
     [Teardown]    Teardown
