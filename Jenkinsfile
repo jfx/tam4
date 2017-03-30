@@ -34,9 +34,9 @@ pipeline {
             steps {
                 dir("${PROJECT_PATH}") {
                     sh 'ng version'
-                    sh "ng lint --format checkstyle > ${WORKSPACE}/build/reports/checkstyle-bug.xml || true"
+                    sh "ng lint --format checkstyle > ${WORKSPACE}/build/reports/checkstyle.xml || true"
                     // Fix ng lint issue
-                    sh "sed '2q;d' ${WORKSPACE}/build/reports/checkstyle-bug.xml > ${WORKSPACE}/build/reports/checkstyle.xml"
+                    // sh "sed '2q;d' ${WORKSPACE}/build/reports/checkstyle-bug.xml > ${WORKSPACE}/build/reports/checkstyle.xml"
                 }
             }
         }
@@ -152,6 +152,7 @@ def runProtractorTests() {
 
 def runRFLocalTests() {
     dir("${PROJECT_PATH}") {
+        sh 'tests/bin/stopLocalTest.sh'
         sh 'tests/bin/startLocalTest.sh'
         sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
         try {
@@ -170,6 +171,7 @@ def runRFLocalTests() {
 def runRFRemoteTests() {
     dir("${PROJECT_PATH}") {
         sh 'tests/bin/loadRemoteDB.sh'
+        sh 'tests/bin/stopRemoteTest.sh'
         sh 'tests/bin/startRemoteTest.sh'
         sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
         try {

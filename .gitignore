@@ -1,12 +1,5 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# compiled output
-/dist
-/tmp
-
-# dependencies
-/node_modules
-
 # config
 src/environments/environment.test-remote.ts
 src/environments/environment.prod.ts
@@ -20,6 +13,14 @@ tests/data/*.pid
 log.html
 output.xml
 report.html
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# dependencies
+/node_modules
 
 # IDEs and editors
 /.idea

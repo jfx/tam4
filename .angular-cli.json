@@ -3,41 +3,43 @@
   "project": {
     "name": "tam4"
   },
-  "apps": [{
-    "root": "src",
-    "outDir": "dist",
-    "assets": [
-      "assets",
-      "favicon.ico"
-    ],
-    "index": "index.html",
-    "main": "main.ts",
-    "polyfills": "polyfills.ts",
-    "test": "test.ts",
-    "tsconfig": "tsconfig.app.json",
-    "testTsconfig": "tsconfig.spec.json",
-    "prefix": "app",
-    "styles": [
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
       "../node_modules/font-awesome/css/font-awesome.css",
       "../node_modules/dragula/dist/dragula.min.css",
       "styles.scss"
-    ],
-    "scripts": [
-    ],
-    "environmentSource": "environments/environment.ts",
-    "environments": {
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
       "dev": "environments/environment.ts",
       "test-local": "environments/environment.test-local.ts",
       "test-remote": "environments/environment.test-remote.ts",
       "prod": "environments/environment.prod.ts"
+      }
     }
-  }],
+  ],
   "e2e": {
     "protractor": {
       "config": "./protractor.conf.js"
     }
   },
-  "lint": [{
+  "lint": [
+    {
       "project": "src/tsconfig.app.json"
     },
     {

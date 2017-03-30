@@ -23,7 +23,7 @@ Element should have model value
 
 Date should be
     [Arguments]    ${id}    ${value}
-    ${attr-value}=    Get Element Attribute    xpath=(//my-date-picker[@id='${id}'])[1]//input@ng-reflect-value
+    ${attr-value}=    Get Element Attribute    xpath=(//my-date-picker[@id='${id}'])@ng-reflect-sel-date
     Should Be Equal    ${attr-value}    ${value}
 
 Load DB
@@ -40,7 +40,7 @@ Load remote DB
     Should Be Equal As Integers    ${rc}    0
 
 Teardown
-    Log     -- Teardown --
+    Log    -- Teardown --
     Close All Browsers
     Terminate All Processes
     : FOR    ${tag}    IN    @{TEST TAGS}

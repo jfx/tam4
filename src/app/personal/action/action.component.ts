@@ -94,7 +94,7 @@ export class ActionComponent implements OnInit {
       const index = this.arrayActions.findIndex(action => ((action.$key === '') && (action.id === '')));
       this.arrayActions.splice(index, 1);
     } else {
-      this.action.$key = this.actionBackup.$key;
+//      this.action.$key = this.actionBackup.$key;
       this.action.id = this.actionBackup.id;
       this.action.title = this.actionBackup.title;
       this.action.todo = this.actionBackup.todo;
