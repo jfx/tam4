@@ -13,6 +13,7 @@ addons:
       - google-chrome-stable
 
 before_install:
+  - mkdir reports
   - npm install -g json-server
   - cp -f tests/data/local-ref.json tests/data/local-dev.json
   - json-server --watch tests/data/local-dev.json &
@@ -26,8 +27,9 @@ before_install:
 script:
   - ng lint
   - ng test --single-run true --code-coverage
+  - cp dist/reports/coverage/lcov.info reports/lcov.info
   - ng e2e
 
 after_success:
-  - cat ./dist/reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-  - cat ./dist/reports/coverage/lcov.info | ./node_modules/.bin/codacy-coverage
+  - cat reports/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+  - cat reports/lcov.info | ./node_modules/.bin/codacy-coverage
