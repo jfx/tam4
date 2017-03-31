@@ -13,6 +13,9 @@ addons:
       - google-chrome-stable
 
 before_install:
+  - npm install -g json-server
+  - cp -f tests/data/local-ref.json tests/data/local-dev.json
+  - json-server --watch tests/data/local-dev.json &
   - npm install -g @angular/cli
   - npm install coveralls
   - npm install codacy-coverage
