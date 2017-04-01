@@ -1,6 +1,8 @@
 # TAM4
 [![Software License](https://img.shields.io/badge/license-GPL%20v3-green.svg?style=flat)](LICENSE)
 [![Code Climate](https://codeclimate.com/github/jfx/tam4/badges/gpa.svg)](https://codeclimate.com/github/jfx/tam4)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e1aa5ceea14a4743b5b6a35ca6858b73)](https://www.codacy.com/app/jfx/tam4?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jfx/tam4&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/jfx/tam4.svg?branch=master)](https://travis-ci.org/jfx/tam4)
 
 TAM4 for Time Actions Management is a personal productivity app.
 
