@@ -19,6 +19,7 @@ before_install:
   - json-server --watch tests/data/local-dev.json &
   - npm install -g @angular/cli
   - npm install coveralls
+  - npm install codecov
   - npm install codacy-coverage
   - export CHROME_BIN=/usr/bin/google-chrome
   - export DISPLAY=:99.0
@@ -32,4 +33,5 @@ script:
 
 after_success:
   - cat reports/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+  - ./node_modules/.bin/codecov -f reports/lcov.info
   - cat reports/lcov.info | ./node_modules/.bin/codacy-coverage
