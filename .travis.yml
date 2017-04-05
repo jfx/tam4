@@ -1,4 +1,3 @@
-#.travis.yml
 sudo: required
 language: node_js
 dist: trusty
@@ -33,3 +32,9 @@ script:
 after_success:
   - cat reports/lcov.info | ./node_modules/coveralls/bin/coveralls.js
   - ./node_modules/.bin/codecov -f reports/lcov.info
+
+notifications:
+  slack:
+    rooms:
+      - secure: orvplhKvrfbZrSX5WwL9TWY4j//7F7KJ5yJcCbGmeRQ3/NJfSBTUO/ylenmw60siF38e+y1Y25rH2sOrFI7qZwB8FtPj096XTMq+O1BzK1PBswxQqzNDhKYtW2cuwwiD7V+sj+33N8Fi3eHQ1F2+5U2U9NacLYTFZBozVS/PfWtoqnLRYk+G7B5Vxq9GtZy9peEOHgiMhNo9wfiyEjM3uci0vzsQ32IO/aS6P+t4npMXhVuKGnO/WphWAbAC3JbELfE9siCCNaWLoJXcYhGeqL6vqVkIgG9JFnk0iFEggStqqeRCfXw4ktSXNuyanjpXJ9z7QiTMqr0q5RCTf6Z0THKOK8VZw8Yb9ZwCP2cGZEzKGD/vseoqqZzGsVdxnULYE+2HDKmZQS2TOwe5BslRVHvJwaj2HlgLwOteE7BpUC6LlHIGVj/SbkC446ipyJfBq+FDGP7Yd3ZIYNlDkhgx3eWGJd9KXWM7VlgSjyY1gLl4WtXWlVAUwY2V6Cob/P083xh2M9J7uNjvcmg6ey9Og+R7TcNdv4DYC26U3jc6uXjjWbs52oeHoF8Fm2+DbbP6I3RtMfQN8Z83qH9yKj1rhcHOXal3K/JrDcWJlAL96BUFUZaHTYbVap0mkQjDP+Rj0m8z37oDASRYqMgFymcE/j+M1AiXrm1bgglfUY6JrpI=
+    on_success: always
