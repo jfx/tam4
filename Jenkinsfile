@@ -34,6 +34,7 @@ pipeline {
             steps {
                 dir("${PROJECT_PATH}") {
                     sh 'ng version'
+                    sh 'npm list --depth=0 2> /dev/null || true'
                     sh "ng lint --format checkstyle > ${WORKSPACE}/build/reports/checkstyle.xml || true"
                     // Fix ng lint issue
                     // sh "sed '2q;d' ${WORKSPACE}/build/reports/checkstyle-bug.xml > ${WORKSPACE}/build/reports/checkstyle.xml"
@@ -157,7 +158,7 @@ def runRFLocalTests() {
         sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
         try {
             sh 'tests/bin/checkSite.sh http://localhost:4201'
-            sh "robot -v GRID:False -v BROWSER:gc -v ENV:LOCAL -d ${WORKSPACE}/build/reports --log none --report none --output local.xml --xunit rf-local-junit.xml /home/fxs/Dropbox/Src/tam4/tests/RF"
+            sh "robot -v GRID:False -v BROWSER:gc -v ENV:LOCAL -d ${WORKSPACE}/build/reports --log none --report none --output local.xml --xunit rf-local-junit.xml tests/RF"
         } catch (err) {
             echo "Caught: ${err}"
             currentBuild.result = 'FAILURE'
@@ -176,7 +177,7 @@ def runRFRemoteTests() {
         sh 'sudo Xvfb :10 -ac -screen 0 1280x1024x24 &'
         try {
             sh 'tests/bin/checkSite.sh http://localhost:4202'
-            sh "robot -v GRID:False -v BROWSER:gc -v ENV:REMOTE -d ${WORKSPACE}/build/reports --log none --report none --output remote.xml --xunit rf-remote-junit.xml /home/fxs/Dropbox/Src/tam4/tests/RF"
+            sh "robot -v GRID:False -v BROWSER:gc -v ENV:REMOTE -d ${WORKSPACE}/build/reports --log none --report none --output remote.xml --xunit rf-remote-junit.xml tests/RF"
         } catch (err) {
             echo "Caught: ${err}"
             currentBuild.result = 'FAILURE'
