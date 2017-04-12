@@ -1,8 +1,8 @@
 *** Variables ***
-&{ACTION1}        title=Learn "Introduction to TypeScript" course with very very long title and some other things    todo=6    done=0    position=1    description=    date=28/02/2017
-&{ACTION2}        title=Write Docker best practices    todo=5    done=1    position=3    description=    date=31/01/2017
-&{ACTION2MOD}     title=Write Docker best practices Mod    todo=7    done=2    position=3    description=Modified description of action    date=03/02/2017
-&{ACTION3ADD}     title=Title of added action    todo=5    done=3    position=6    description=Description of added action    date=31/01/2017
+&{ACTION1}        key=    title=Learn "Introduction to TypeScript" course with very very long title and some other things    todo=6    done=0    order=5    description=    date=28/02/2017
+&{ACTION2}        key=    title=Write Docker best practices    todo=5    done=1    order=3    description=    date=31/01/2017
+&{ACTION2MOD}     key=    title=Write Docker best practices Mod    todo=7    done=2    order=3    description=Modified description of action    date=03/02/2017
+&{ACTION3ADD}     key=    title=Title of added action    todo=5    done=3    order=1    description=Description of added action    date=31/01/2017
 &{ACTION_VIEW}    edit_button=sp_i_action_edit    delete_button=sp_i_action_del    edit_link=sp_l_action_edit    todo_pill=sp_p_action_todo    done_pill=sp_p_action_done    date_pill=sp_p_action_date
 &{ACTION_EDIT}    title=sp_edit_title    todo=sp_edit_todo    done=sp_edit_done    date=sp_edit_date    desc=sp_edit_desc    save=sp_b_save    close=sp_b_close
 &{ACTION_MODAL}    message=You are about to delete this action:    close=sp_modal_b_close    yes=sp_modal_b_delete    no=sp_modal_b_cancel

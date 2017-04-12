@@ -2,6 +2,7 @@
 Library           OperatingSystem
 Library           Process
 Library           Selenium2Library
+Library           String
 Resource          ../Conf/common.txt
 
 *** Keywords ***

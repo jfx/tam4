@@ -91,11 +91,9 @@ export class ActionComponent implements OnInit {
   close(): void {
     // Add -> remove it from Array
     if (this.isAdd()) {
-      const index = this.arrayActions.findIndex(action => ((action.$key === '') && (action.id === '')));
+      const index = this.arrayActions.findIndex(action => (action.$key === ''));
       this.arrayActions.splice(index, 1);
     } else {
-//      this.action.$key = this.actionBackup.$key;
-      this.action.id = this.actionBackup.id;
       this.action.title = this.actionBackup.title;
       this.action.todo = this.actionBackup.todo;
       this.action.done = this.actionBackup.done;
@@ -123,10 +121,6 @@ export class ActionComponent implements OnInit {
 
   unsetEdit(): void {
     this.edit = false;
-  }
-
-  getId(): string {
-    return this.action.position.toString();
   }
 
   displayDate(): string {
@@ -168,7 +162,7 @@ export class ActionComponent implements OnInit {
         this.actionService.deleteInToday(this.action);
         break;
     }
-    const index = this.arrayActions.findIndex(action => ((action.$key === this.action.$key) && (action.id === this.action.id)));
+    const index = this.arrayActions.findIndex(action => (action.$key === this.action.$key));
     if (index != null) {
       this.arrayActions.splice(index, 1);
     }
@@ -176,6 +170,6 @@ export class ActionComponent implements OnInit {
   }
 
   isAdd(): boolean {
-    return ((this.action.$key === '') && (this.action.id === ''));
+    return (this.action.$key === '');
   }
 }

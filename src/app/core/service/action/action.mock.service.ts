@@ -32,6 +32,7 @@ import { AlertService } from '../alert/alert.service';
 
 import { Action } from 'app/personal/shared/action.model';
 import { Alert } from '../../shared/alert.model';
+import { IdGenerator } from '../../util/id-generator';
 
 @Injectable()
 export class ActionMockService {
@@ -63,6 +64,7 @@ export class ActionMockService {
   }
 
   private create(action: Action, url: any) {
+    action.$key = IdGenerator.generate();
     this.http
       .post(url, JSON.stringify(action), this.options)
       .subscribe(res => { action.id = this.extractData(res).id; }, err => this.handleError(err));

@@ -5,3 +5,10 @@ Resource          ../Conf/personal.txt
 *** Keywords ***
 I go to Personal
     Go to    ${URL}${location_personal}
+
+Get key action from li id
+    [Arguments]    ${backlog}    ${order}
+    ${id} =    Get Element Attribute    xpath=(//ul[@id='${backlog}']/li)[${order}]@id
+    Log    ${id}
+    ${key} =    Get Substring    ${id}    3
+    [Return]    ${key}

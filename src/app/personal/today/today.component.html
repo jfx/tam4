@@ -6,7 +6,7 @@
       </button>
     </h3>
     <ul id ="{{ sprintPrefix }}" class="list-group" [dragula]='"today-bag"' [dragulaModel]='sprintActions'>
-      <li *ngFor="let sprintAction of sprintActions" id="li_{{ sprintAction.id }}" class="list-group-item">
+      <li *ngFor="let sprintAction of sprintActions" id="li_{{ sprintAction.$key }}" class="list-group-item">
         <app-personal-action [action]="sprintAction" [arrayActions]="sprintActions" [backlogPrefix]="sprintPrefix"></app-personal-action>
       </li>
     </ul>
@@ -19,7 +19,7 @@
     </h3>
       <div class="panel-body">
         <ul id ="{{ todayPrefix }}" class="list-group" [dragula]='"today-bag"' [dragulaModel]='todayActions'>
-          <li *ngFor="let todayAction of todayActions" id="li_{{ todayAction.id }}" class="list-group-item">
+          <li *ngFor="let todayAction of todayActions" id="li_{{ todayAction.$key }}" class="list-group-item">
              <app-personal-action [action]="todayAction" [arrayActions]="todayActions" [backlogPrefix]="todayPrefix"></app-personal-action>
           </li>
         </ul>

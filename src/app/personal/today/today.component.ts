@@ -91,12 +91,12 @@ export class TodayComponent implements OnInit {
 
   private onDropModel(args: any): void {
     const [el, target, source] = args;
-    const actionId = (el.attributes.id.nodeValue).substr(3);
+    const actionKey = (el.attributes.id.nodeValue).substr(3);
     const sourceId = source.attributes.id.nodeValue;
     const targetId = target.attributes.id.nodeValue;
 
     if (targetId === this.sprintPrefix) {
-      const index = this.sprintActions.findIndex(action => (action.id === actionId));
+      const index = this.sprintActions.findIndex(action => (action.$key === actionKey));
       this.updatePosition(this.sprintActions, index);
       PositionArray.sort(this.sprintActions);
 
@@ -107,7 +107,7 @@ export class TodayComponent implements OnInit {
         this.actionService.deleteInToday(this.sprintActions[index]);
       }
     } else if (targetId === this.todayPrefix) {
-      const index = this.todayActions.findIndex(action => (action.id === actionId));
+      const index = this.todayActions.findIndex(action => (action.$key === actionKey));
       this.updatePosition(this.todayActions, index);
       PositionArray.sort(this.todayActions);
 
