@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with tam4. If not, see <http://www.gnu.org/licenses/>.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -34,20 +34,20 @@ import { PositionArray } from 'app/core/util/position-array';
   templateUrl: './today.component.html',
   styleUrls: ['./today.component.css'],
 })
-export class TodayComponent implements OnInit {
+export class TodayComponent implements OnInit, OnDestroy {
 
   sprintActions: Array<Action> = [];
   todayActions: Array<Action> = [];
   sprintPrefix = 'sp';
   todayPrefix = 'td';
+  dropModelSubscription;
 
   constructor(
     private actionService: ActionService,
     private dragulaService: DragulaService,
     private alertService: AlertService
   ) {
-
-    dragulaService.dropModel.subscribe((value: any) => {
+    this.dropModelSubscription = dragulaService.dropModel.subscribe((value: any) => {
       this.onDropModel(value.slice(1));
     });
 
@@ -59,6 +59,10 @@ export class TodayComponent implements OnInit {
   ngOnInit(): void {
     this.getSprintActions();
     this.getTodayActions();
+  }
+
+  ngOnDestroy() {
+    this.dropModelSubscription.unsubscribe();
   }
 
   getSprintActions(): void {
@@ -121,7 +125,7 @@ export class TodayComponent implements OnInit {
   }
 
   private onRemoveModel(args: any): void {
-    console.log('Error onRemoveModel !');
+    console.error('Error onRemoveModel !');
     const alert = new Alert();
     this.alertService.add(alert);
   }
@@ -142,7 +146,11 @@ export class TodayComponent implements OnInit {
   }
 
   private updatePosition(arrayActions: Array<Action>, index: number): void {
-    if (index === 0) {
+    if (index < 0) {
+      console.error('Error updatePosition : index < 0');
+      const alert = new Alert();
+      this.alertService.add(alert);
+    } else if (index === 0) {
       arrayActions[index].position = PositionArray.getNextPosition(arrayActions);
     } else if (index === (arrayActions.length - 1)) {
       arrayActions[index].position = PositionArray.getFirstPosition(arrayActions);
