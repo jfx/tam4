@@ -24,7 +24,7 @@
     "bootstrap": "4.0.0-alpha.5",
     "core-js": "^2.4.1",
     "dragula": "^3.7.2",
-    "firebase": "^3.7.6",
+    "firebase": "3.7.7",
     "font-awesome": "^4.7.0",
     "lato-font": "^3.0.0",
     "mydatepicker": "^1.9.1",
