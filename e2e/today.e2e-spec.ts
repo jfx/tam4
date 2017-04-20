@@ -18,7 +18,13 @@ describe('tam4 Today', function () {
   it('should display title saying Sprint backlog', () => {
     page.navigateTo();
     const pageTitleElt = page.getPageTitleElements();
-    expect(pageTitleElt.get(0).getText()).toEqual('Sprint backlog');
+    expect(pageTitleElt.get(0).getText()).toContain('Sprint backlog');
+  });
+
+  it('should display title saying Todo today', () => {
+    page.navigateTo();
+    const pageTitleElt = page.getPageTitleElements();
+    expect(pageTitleElt.get(1).getText()).toContain('Todo today');
   });
 });
 

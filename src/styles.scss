@@ -1,10 +1,8 @@
 @import 'variables';
 @import '../node_modules/bootstrap/scss/bootstrap';
-
 @import '../node_modules/lato-font/scss/public-api';
 $lato-font-path: '../node_modules/lato-font/fonts';
 @include lato-include-font('medium');
-
 $font-size-base: 15px;
 $font-size-large: ceil(($font-size-base * 1.25)); // ~18px
 $font-size-small: ceil(($font-size-base * 0.85)); // ~12px
@@ -23,30 +21,10 @@ body {
   background-repeat: no-repeat;
 }
 
-section {
-  padding: 25px 0 0 0;
-}
-
-// .body-container {
-//   -webkit-flex: 1;
-//   flex: 1;
-//   // needed to prevent pages with a very small height and browsers not supporting flex
-//   min-height: 600px;
-//   #main h1,
-//   #main h2 {
-//     margin-top: 0;
-//   }
-// }
-.navbar-brand {
-  padding: 0px;
-  /* firefox bug fix */
-}
-
-.navbar-brand>img {
-  height: 100%;
-  padding: 15px;
-  /* firefox bug fix */
-  width: auto;
+.float-right {
+  position: absolute;
+  right: 0;
+  padding: 0 15px 0 0;
 }
 
 th {
@@ -68,7 +46,6 @@ footer {
   padding-top: 1em;
   padding-bottom: 1em;
   p {
-    text-align: center;
     font-size: $font-size-small;
     margin-bottom: .25em;
   }

@@ -1,23 +1,28 @@
 <div [hidden]="edit">
-  <div class="row">
-    <i onClick="window.alert('Action closed !');" class="fa fa-square-o"></i>
-    <i onClick="window.alert('Action chart !');" class="fa fa-area-chart"></i>
-    <i id="{{ backlogPrefix }}_i_action_edit_{{ action.$key }}" (click)="setEdit()" class="fa fa-edit"></i>
-    <i id="{{ backlogPrefix }}_i_action_del_{{ action.$key }}" (click)="showDeleteModal()" class="fa fa-times"></i>&nbsp;
-    <a id="{{ backlogPrefix }}_l_action_edit_{{ action.$key }}" href="javascript:void(0)" (click)="setEdit()" placement="bottom"
-      tooltip="{{ action.description }}">{{ action.title }} <span id="{{ backlogPrefix }}_p_action_todo_{{ action.$key }}" class="tag tag-pill tag-default">{{ action.todo }}</span></a>
-    <div class="float-xs-right">
+  <div class="d-flex flex-row">
+    <div class="justify-content-start">
+      <i onClick="window.alert('Action closed !');" class="fa fa-square-o"></i>
+      <i onClick="window.alert('Action 1 todo done !');" class="fa fa-thumbs-up"></i>
+      <i onClick="window.alert('Action chart !');" class="fa fa-area-chart"></i>
+      <i id="{{ backlogPrefix }}_i_action_edit_{{ action.$key }}" (click)="setEdit()" class="fa fa-edit"></i>
+      <i id="{{ backlogPrefix }}_i_action_del_{{ action.$key }}" (click)="showDeleteModal()" class="fa fa-times"></i>&nbsp;
+      <a id="{{ backlogPrefix }}_l_action_edit_{{ action.$key }}" href="javascript:void(0)" (click)="setEdit()" placement="bottom"
+        tooltip="{{ action.description }}">{{ action.title }} <span id="{{ backlogPrefix }}_p_action_todo_{{ action.$key }}" class="badge badge-pill badge-default">{{ action.todo }}</span></a>
+    </div>
+    <div class="float-right">
       <i id="{{ backlogPrefix }}_i_action_more_{{ action.$key }}" class="fa fa-ellipsis-v"></i>
     </div>
   </div>
-  <div class="row">
-    <span class="tag tag-danger">Urgent</span>
-    <span class="tag tag-default">Project 1</span>
-    <div class="float-xs-right">
-      <span id="{{ backlogPrefix }}_p_action_done_{{ action.$key }}" class="tag tag-pill tag-success">
+  <div class="d-flex d-flex-row">
+    <div class="justify-content-end">
+      <span class="badge badge-pill badge-danger">Urgent</span>
+      <span class="badge badge-pill badge-default">Project 1</span>
+    </div>
+    <div class="float-right">
+      <span id="{{ backlogPrefix }}_p_action_done_{{ action.$key }}" class="badge badge-pill badge-success">
         {{ action.done }} / {{ action.todo + action.done }}
       </span>
-      <span id="{{ backlogPrefix }}_p_action_date_{{ action.$key }}" class="tag tag-pill tag-default">{{ displayDate() }}</span>
+      <span id="{{ backlogPrefix }}_p_action_date_{{ action.$key }}" class="badge badge-pill badge-default">{{ displayDate() }}</span>
     </div>
   </div>
 </div>
@@ -29,20 +34,20 @@
         name="title" placeholder="Title">
     </div>
     <div class="form-group row">
-      <label class="col-xs-3 col-form-label">Due date</label>
-      <div class="col-xs-4">
+      <label class="col-3 col-form-label">Due date</label>
+      <div class="col-4">
         <my-date-picker id="{{ backlogPrefix }}_edit_date_{{ action.$key }}" [selDate]="displayDate()" [options]="myDatePickerNormalOptions"
           (dateChanged)="onDateChanged($event)"></my-date-picker>
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-xs-3 col-form-label" for="{{ backlogPrefix }}_edit_todo_{{ action.$key }}">Todo</label>
-      <div class="col-xs-3">
+      <label class="col-3 col-form-label" for="{{ backlogPrefix }}_edit_todo_{{ action.$key }}">Todo</label>
+      <div class="col-3">
         <input type="number" class="form-control" id="{{ backlogPrefix }}_edit_todo_{{ action.$key }}" required [(ngModel)]="action.todo"
           name="todo">
       </div>
-      <label class="col-xs-3 col-form-label" for="{{ backlogPrefix }}_edit_done_{{ action.$key }}">Done</label>
-      <div class="col-xs-3">
+      <label class="col-3 col-form-label" for="{{ backlogPrefix }}_edit_done_{{ action.$key }}">Done</label>
+      <div class="col-3">
         <input type="number" class="form-control" id="{{ backlogPrefix }}_edit_done_{{ action.$key }}" required [(ngModel)]="action.done"
           name="done">
       </div>
@@ -61,7 +66,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title pull-left">Delete action</h4>
-        <button id="{{ backlogPrefix }}_modal_b_close_{{ action.$key }}" type="button" class="close pull-right" aria-label="Close" (click)="hideDeleteModal()">
+        <button id="{{ backlogPrefix }}_modal_b_close_{{ action.$key }}" type="button" class="close pull-right" aria-label="Close"
+          (click)="hideDeleteModal()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
