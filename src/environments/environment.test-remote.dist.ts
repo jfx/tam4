@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   envName: 'TEST-REMOTE',
-  version: '0.6.0',
+  version: '0.6.1',
   mock: false,
   mockServer: '',
   apiKey: '<your-key>',

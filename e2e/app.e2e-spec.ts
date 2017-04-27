@@ -9,6 +9,6 @@ describe('tam4 App', function() {
 
   it('should have a title', () => {
     page.navigateTo();
-    expect(page.getWindowTitle()).toEqual('Tam4');
+    expect(page.getWindowTitle()).toEqual('TAM4');
   });
 });
