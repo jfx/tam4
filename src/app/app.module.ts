@@ -33,6 +33,7 @@ import { PersonalModule } from './personal/personal.module';
 import { SharedModule } from './shared/shared.module';
 
 import { environment } from 'app/../environments/environment';
+import { LoginComponent } from './login/login.component';
 
 const importedModules: Array<any> = [
     BrowserModule,
@@ -55,6 +56,7 @@ if (environment.mock) {
   declarations: [
     AppComponent,
     NavbarComponent,
+    LoginComponent,
   ],
   exports: [
   ],

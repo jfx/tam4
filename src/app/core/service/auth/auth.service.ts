@@ -16,23 +16,23 @@
  * You should have received a copy of the GNU General Public License
  * along with tam4. If not, see <http://www.gnu.org/licenses/>.
  */
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { AuthService } from 'app/core/service/auth/auth.service';
+import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 
-@Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
-})
-export class NavbarComponent implements OnInit {
+@Injectable()
+export class AuthService {
 
-  constructor(public authService: AuthService) { }
+  constructor(public af: AngularFire) { }
 
-  ngOnInit() {
+  loginWithGoogle() {
+    return this.af.auth.login({
+      provider: AuthProviders.Google,
+      method: AuthMethods.Popup
+    });
   }
 
   logout() {
-    this.authService.logout();
+    return this.af.auth.logout();
   }
 }

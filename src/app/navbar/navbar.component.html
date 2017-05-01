@@ -5,7 +5,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
     <a class="navbar-brand" routerLink="/home">
-    <img src="/assets/images/TAM4-logo.png" width="79" height="30" alt="TAM4 logo">
+      <img src="/assets/images/TAM4-logo.png" width="79" height="30" alt="TAM4 logo">
     </a>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
       <div class="navbar-nav">
@@ -14,7 +14,7 @@
         <a class="nav-item nav-link" routerLinkActive="active" routerLink="/today"><i class="fa fa-home"></i> Personal</a>
         <a class="nav-item nav-link" href="#"><i class="fa fa-tasks"></i> Projects</a>
         <a class="nav-item nav-link" href="#"><i class="fa fa-user"></i> Profile</a>
-        <a class="nav-item nav-link" href="#"><i class="fa fa-sign-out"></i> Logout</a>
+        <a class="nav-item nav-link" href="/login" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
       </div>
     </div>
   </nav>

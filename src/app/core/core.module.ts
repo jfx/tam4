@@ -26,6 +26,7 @@ import { environment } from 'app/../environments/environment';
 
 import { ActionService } from './service/action/action.service';
 import { AlertService } from './service/alert/alert.service';
+import { AuthService } from './service/auth/auth.service';
 import { AlertComponent } from './alert/alert.component';
 
 export const firebaseConfig = {
@@ -45,7 +46,7 @@ export const firebaseConfig = {
     AlertComponent],
   exports: [
     AlertComponent],
-  providers: [ActionService, AlertService]
+  providers: [ActionService, AlertService, AuthService]
 })
 export class CoreModule {
 

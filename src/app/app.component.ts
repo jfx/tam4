@@ -17,7 +17,9 @@
  * along with tam4. If not, see <http://www.gnu.org/licenses/>.
  */
 import { Component, ViewContainerRef } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { AuthService } from 'app/core/service/auth/auth.service';
 import { environment } from 'app/../environments/environment';
 
 @Component({
@@ -26,11 +28,23 @@ import { environment } from 'app/../environments/environment';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public isLoggedIn: boolean;
   private viewContainerRef: ViewContainerRef;
   footer = 'tam4.io v' + environment.version + ' - bbb - '
   + environment.envName + ' - &copy; ' + new Date().getFullYear();
 
-  public constructor(viewContainerRef: ViewContainerRef) {
+  public constructor(public authService: AuthService, private router: Router, viewContainerRef: ViewContainerRef) {
+    this.authService.af.auth.subscribe(
+      (auth) => {
+        if (auth == null) {
+          this.router.navigate(['login']);
+          this.isLoggedIn = false;
+        } else {
+          this.isLoggedIn = true;
+          this.router.navigate(['/home']);
+        }
+      }
+    );
     // You need this small hack in order to catch application root view container ref
     this.viewContainerRef = viewContainerRef;
   }
