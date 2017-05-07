@@ -19,7 +19,7 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -30,9 +30,9 @@ export class ActionService {
   private sprintBacklog: FirebaseListObservable<any>;
   private todayBacklog: FirebaseListObservable<any>;
 
-  constructor(private af: AngularFire) {
-    this.sprintBacklog = this.af.database.list('/backlog-sprint');
-    this.todayBacklog = this.af.database.list('/backlog-today');
+  constructor(private db: AngularFireDatabase) {
+    this.sprintBacklog = this.db.list('/backlog-sprint');
+    this.todayBacklog = this.db.list('/backlog-today');
   }
 
   getSprintActions(): Observable<Action[]> {

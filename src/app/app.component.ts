@@ -34,7 +34,7 @@ export class AppComponent {
   + environment.envName + ' - &copy; ' + new Date().getFullYear();
 
   public constructor(public authService: AuthService, private router: Router, viewContainerRef: ViewContainerRef) {
-    this.authService.af.auth.subscribe(
+    this.authService.user.subscribe(
       (auth) => {
         if (auth == null) {
           this.router.navigate(['login']);
