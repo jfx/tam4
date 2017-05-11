@@ -16,29 +16,18 @@
  * You should have received a copy of the GNU General Public License
  * along with tam4. If not, see <http://www.gnu.org/licenses/>.
  */
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-// Necessary for ActionMockService
-import { HttpModule } from '@angular/http';
+@Injectable()
+export class AuthMockService {
 
-import { ActionService } from './service/action/action.service';
-import { ActionMockService } from './service/action/action.mock.service';
-import { AuthService } from './service/auth/auth.service';
-import { AuthMockService } from './service/auth/auth.mock.service';
+  constructor() {
+  }
 
-@NgModule({
-  imports: [
-    CommonModule,
-    HttpModule,
-  ],
-  declarations: [
-  ],
-  exports: [
-  ],
-  providers: [
-    { provide: ActionService, useClass: ActionMockService },
-    { provide: AuthService, useClass: AuthMockService }
-  ]
-})
-export class MockModule { }
+  loginWithGoogle() {
+    return true;
+  }
+
+  logout() {
+  }
+}
