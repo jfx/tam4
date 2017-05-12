@@ -1,5 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 
+import { AuthMockService } from 'app/core/service/auth/auth.mock.service';
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
@@ -8,18 +9,15 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
-    })
-    .compileComponents();
+      declarations: [LoginComponent],
+      providers: [AuthMockService]
+    });
   }));
 
-  beforeEach(() => {
+  it('should create', inject([AuthMockService], async () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
     expect(component).toBeTruthy();
-  });
+  }));
 });

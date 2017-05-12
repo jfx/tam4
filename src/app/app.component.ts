@@ -34,17 +34,19 @@ export class AppComponent {
   + environment.envName + ' - &copy; ' + new Date().getFullYear();
 
   public constructor(public authService: AuthService, private router: Router, viewContainerRef: ViewContainerRef) {
-    this.authService.user.subscribe(
-      (auth) => {
-        if (auth == null) {
-          this.router.navigate(['login']);
-          this.isLoggedIn = false;
-        } else {
-          this.isLoggedIn = true;
-          this.router.navigate(['/home']);
+    if (!environment.mock) {
+      this.authService.user.subscribe(
+        (auth) => {
+          if (auth == null) {
+            this.router.navigate(['login']);
+            this.isLoggedIn = false;
+          } else {
+            this.isLoggedIn = true;
+            this.router.navigate(['/home']);
+          }
         }
-      }
-    );
+      );
+    }
     // You need this small hack in order to catch application root view container ref
     this.viewContainerRef = viewContainerRef;
   }
