@@ -1,6 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { HttpModule, Http } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { ActionMockService } from './action.mock.service';

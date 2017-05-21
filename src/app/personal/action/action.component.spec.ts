@@ -10,14 +10,17 @@ import { ModalModule } from 'ng2-bootstrap/modal';
 
 import { ActionComponent } from './action.component';
 import { Action } from '../shared/action.model';
+import { ActionService } from 'app/core/service/action/action.service';
 import { ActionMockService } from 'app/core/service/action/action.mock.service';
 import { AlertService } from 'app/core/service/alert/alert.service';
+import { AuthService } from 'app/core/service/auth/auth.service';
+import { AuthMockService } from 'app/core/service/auth/auth.mock.service';
 
 describe('ActionComponent', () => {
   let component: ActionComponent;
   let fixture: ComponentFixture<ActionComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
@@ -26,11 +29,15 @@ describe('ActionComponent', () => {
       ],
       declarations: [ActionComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [ActionMockService, AlertService]
+      providers: [
+        { provide: ActionService, useClass: ActionMockService },
+        AlertService,
+      ]
     });
-  }));
+  });
 
-  it('should create', inject([ActionMockService], async () => {
+
+  it('should create', inject([ActionService], async () => {
     fixture = TestBed.createComponent(ActionComponent);
     component = fixture.componentInstance;
     component.action = new Action('-KhJCwYISInXOfbDW9SN', '11', 'Title 1', 1, 2, 1, 'Desc 1', '31/12/2016');
