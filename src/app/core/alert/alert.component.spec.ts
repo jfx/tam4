@@ -25,7 +25,7 @@ describe('AlertComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', inject([AlertService], () => {
+  it('should work', inject([AlertService], () => {
     expect(component).toBeTruthy();
   }));
 });

@@ -16,34 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with tam4. If not, see <http://www.gnu.org/licenses/>.
  */
-import { Injectable } from '@angular/core';
-
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-
-import { User } from './user.model';
-
-@Injectable()
-export class AuthMockService {
-
-  private userSource = new Subject<User>();
-
-  user = this.userSource.asObservable();
-
-  constructor() {
-  }
-
-  loginWithGoogle() {
-    const userTest = new User();
-    userTest.uid = '001';
-    userTest.displayName = 'User Test';
-    this.userSource.next(userTest);
-
-    return this.userSource.toPromise();
-  }
-
-  logout() {
-    this.userSource.next(null);
-    return this.userSource.toPromise();
-  }
+export class User {
+  public uid: string;
+  public displayName: string;
+  public providerId: string;
+  public photoURL: string;
 }

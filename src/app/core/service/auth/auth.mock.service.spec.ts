@@ -9,7 +9,7 @@ describe('Service: AuthMockService', () => {
     });
   });
 
-  it('should ...', inject([AuthMockService], (service: AuthMockService) => {
+  it('should create', inject([AuthMockService], (service: AuthMockService) => {
     expect(service).toBeTruthy();
   }));
 });
