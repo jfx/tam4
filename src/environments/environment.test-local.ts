@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   envName: 'TEST-LOCAL',
-  version: '0.6.1',
+  version: '0.7.0',
   mock: true,
   mockServer: 'http://localhost:3001',
   apiKey: 'not-used',
