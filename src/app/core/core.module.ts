@@ -22,7 +22,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AlertModule } from 'ng2-bootstrap/alert';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 import { environment } from 'app/../environments/environment';
 

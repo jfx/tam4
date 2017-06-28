@@ -19,8 +19,8 @@
 import { NgModule } from '@angular/core';
 
 import { DragulaModule } from 'ng2-dragula';
-import { ModalModule } from 'ng2-bootstrap/modal';
-import { TooltipModule } from 'ng2-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { MyDatePickerModule } from 'mydatepicker';
 

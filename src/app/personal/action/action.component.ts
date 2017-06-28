@@ -21,7 +21,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 
 import * as moment from 'moment';
 
